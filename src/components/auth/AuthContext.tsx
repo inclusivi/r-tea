@@ -10,6 +10,10 @@ type AuthContextProviderProps = {
     children: React.ReactNode;
 };
 
+type AuthContextProps = {
+    user: User | null;
+}
+
 const auth = getAuth(firebaseApp);
 
 export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
@@ -39,7 +43,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     );
 };
 
-export const AuthContext = React.createContext({});
+export const AuthContext = React.createContext<AuthContextProps>({user: null});
 
 export const useAuthContext = () => React.useContext(AuthContext);
 
