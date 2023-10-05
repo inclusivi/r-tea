@@ -4,6 +4,8 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/components/auth/AuthContext";
 import LoadingPage from "@/components/loading/LoadingPage";
+import ObservacoesTree from "./ObservacoesTree";
+import { observacoes } from "./comportamentos";
 
 export default function UserHomePage() {
     const { user } = useAuthContext()
@@ -13,7 +15,7 @@ export default function UserHomePage() {
         if (user == null) router.push("/auth/login")
     }, [user, router])
 
-    return (user ? <h1>Página logada</h1> : <LoadingPage />);
+    return (user ? <ObservacoesTree data={observacoes} /> : <LoadingPage />);
 }
 
 
