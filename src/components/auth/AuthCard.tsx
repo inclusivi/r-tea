@@ -1,7 +1,7 @@
 'use client';
 
-import { Box, Card } from "@mui/material";
-// import { MainCard } from "../shared/surfaces/MainCard";
+import { Box } from "@mui/material";
+import { MainCard } from "../shared/surfaces/MainCard";
 
 export const AuthCard = ({ 
     children, 
@@ -10,7 +10,7 @@ export const AuthCard = ({
     children: React.ReactNode;
 
 }) => (
-    <Card
+    <MainCard
       sx={{
         maxWidth: { xs: 400, lg: 475 },
         margin: { xs: 2.5, md: 3 },
@@ -25,5 +25,5 @@ export const AuthCard = ({
       boxShadow
     >
       <Box sx={{ p: { xs: 2, sm: 3, md: 4, xl: 5 } }}>{children}</Box>
-    </Card>
+    </MainCard>
   );
