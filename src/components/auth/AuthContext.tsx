@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { onAuthStateChanged, getAuth, User } from 'firebase/auth';
 
 import { firebaseApp } from '@/modules/firebase/config';
+import LoadingPage from '../loading/LoadingPage';
 
 type AuthContextProviderProps = {
     children: React.ReactNode;
@@ -38,7 +39,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
 
     return (
         <AuthContext.Provider value={{ user }}>
-            {loading ? <div>Carregando...</div> : children}
+            {loading ? <LoadingPage /> : children}
         </AuthContext.Provider>
     );
 };
