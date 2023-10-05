@@ -30,12 +30,16 @@ import { AnimateButton } from '../shared/elements/AnimatedButton';
 
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
+import { login } from '@/modules/firebase/auth/login';
+import { useRouter } from 'next/navigation';
 
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 export const LoginForm = () => {
   const [checked, setChecked] = React.useState(false);
+
+  const router = useRouter();
 
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => {
@@ -55,12 +59,14 @@ export const LoginForm = () => {
           submit: null
         }}
         validationSchema={Yup.object().shape({
-          email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-          password: Yup.string().max(255).required('Password is required')
+          email: Yup.string().email('Deve ser e-mail válido').max(255).required('Favor fornecer seu e-mail'),
+          password: Yup.string().max(255).required('Favor fornecer sua senha')
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
             setStatus({ success: false });
+            await login(values.email, values.password);
+            router.push('/user/home');
             setSubmitting(false);
           } catch (err) {
             setStatus({ success: false });

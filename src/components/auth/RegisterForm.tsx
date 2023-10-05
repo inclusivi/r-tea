@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react';
 import {
     Box,
     Button,
-    Divider,
     FormControl,
     FormHelperText,
     Grid,
@@ -32,6 +31,8 @@ import { strengthColor, strengthIndicator } from '@/modules/utils/passwordStreng
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import { AnimateButton } from '../shared/elements/AnimatedButton';
+import { register } from '@/modules/firebase/auth/register';
+import { useRouter } from 'next/navigation';
 
 
 type PasswordStrength = {
@@ -54,6 +55,8 @@ export const RegisterForm = () => {
         const temp = strengthIndicator(value);
         setLevel(strengthColor(temp));
     };
+
+    const router = useRouter();
 
     useEffect(() => {
         changePassword('');
@@ -79,6 +82,8 @@ export const RegisterForm = () => {
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
                         setStatus({ success: false });
+                        await register(values.email, values.password);
+                        router.push('/user/home');
                         setSubmitting(false);
                     } catch (err) {
                         console.error(err);
