@@ -1,39 +1,53 @@
-import { ThemeOptions } from "@mui/material";
-import { ThemePalette } from "./palette";
+import { PaletteOptions, ThemeOptions } from "@mui/material";
+//import { ThemePalette } from "./palette";
 import { ThemeTypography } from "./typography";
-import { ThemeShadows } from "./shadows";
+//import { ThemeShadows } from "./shadows";
+import type {} from '@mui/x-data-grid/themeAugmentation';
 
-const themePalette = ThemePalette('light');
+//const themePalette = ThemePalette('light');
 const themeTypography = ThemeTypography(`'Roboto', sans-serif`);
-const themeShadows = ThemeShadows(themePalette);
+//const themeShadows = ThemeShadows(themePalette);
 
-type CustomThemeOptions = ThemeOptions & {
-    customShadows?: {
-        button?: string;
-        text?: string;
-        z1?: string;
-    };
+const darkPalette: PaletteOptions = {
+    mode: 'dark',
+    primary: {
+        main: '#0B3954',
+    },
+    secondary: {
+        main: '#8ecae6',
+    },
+}
+
+const lightPalette: PaletteOptions = {
+    mode: 'light',
+    primary: {
+        main: '#0B3954',
+    },
+    secondary: {
+        main: '#8ecae6',
+    },
+}
+
+export const darkTheme: ThemeOptions = {
+    palette: darkPalette,
+    typography: themeTypography,
+    components: {
+        MuiAppBar: {
+            defaultProps: {
+                enableColorOnDark: true,
+            },
+        },
+        MuiDataGrid: {
+            styleOverrides: {
+                columnHeaderTitle: {
+                    fontWeight: 'bold',
+                },
+            },
+        },
+    },
 };
 
-export const themeOptions: CustomThemeOptions  = {
-    breakpoints: {
-        values: {
-            xs: 0,
-            sm: 768,
-            md: 1024,
-            lg: 1266,
-            xl: 1536
-        }
-    },
-    direction: 'ltr',
-    mixins: {
-        toolbar: {
-            minHeight: 60,
-            paddingTop: 8,
-            paddingBottom: 8
-        }
-    },
-    palette: themePalette,
-    customShadows: themeShadows,
-    typography: themeTypography
+export const lightTheme: ThemeOptions = {
+    ...darkTheme,
+    palette: lightPalette,
 };

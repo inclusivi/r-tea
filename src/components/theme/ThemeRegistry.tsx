@@ -3,13 +3,14 @@
 import createCache from '@emotion/cache';
 import { useServerInsertedHTML } from 'next/navigation';
 import { CacheProvider } from '@emotion/react';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeOptions, ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { themeOptions } from './default';
 import { useState } from 'react';
 import { Options as CacheOptions } from '@emotion/cache';
+import { ptBR } from '@mui/x-data-grid';
 
 type ThemeRegistryProps = {
+    theme: ThemeOptions;
     options: CacheOptions;
     children: React.ReactNode;
 }
@@ -57,7 +58,7 @@ export default function ThemeRegistry(props: ThemeRegistryProps) {
         );
     });
 
-    const theme = createTheme(themeOptions);
+    const theme = createTheme(props.theme, ptBR);
 
     return (
         <CacheProvider value={cache}>

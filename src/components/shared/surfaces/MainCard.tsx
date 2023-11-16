@@ -50,7 +50,6 @@ export function MainCard(
 
     return (
         <Card
-            elevation={elevation || 0}
             {...others}
             sx={{
                 border: border ? '1px solid' : 'none',
