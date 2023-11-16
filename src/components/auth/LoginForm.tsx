@@ -30,8 +30,8 @@ import { AnimateButton } from '../shared/elements/AnimatedButton';
 
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
-import { login } from '@/modules/firebase/auth/login';
 import { useRouter } from 'next/navigation';
+import { login } from '@/modules/firebase/services/auth';
 
 
 // ============================|| FIREBASE - LOGIN ||============================ //
@@ -66,7 +66,6 @@ export const LoginForm = () => {
           try {
             setStatus({ success: false });
             await login(values.email, values.password);
-            router.push('/user/home');
             setSubmitting(false);
           } catch (err) {
             setStatus({ success: false });

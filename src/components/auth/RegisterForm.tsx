@@ -24,15 +24,13 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 // project import
-import FirebaseSocial from './FirebaseSocial';
-
 import { strengthColor, strengthIndicator } from '@/modules/utils/passwordStrength';
 
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import { AnimateButton } from '../shared/elements/AnimatedButton';
-import { register } from '@/modules/firebase/auth/register';
 import { useRouter } from 'next/navigation';
+import { register } from '@/modules/firebase/services/auth';
 
 
 type PasswordStrength = {
@@ -82,8 +80,7 @@ export const RegisterForm = () => {
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
                         setStatus({ success: false });
-                        await register(values.email, values.password);
-                        router.push('/user/home');
+                        await register(values.email, values.password, values.firstname, values.lastname);
                         setSubmitting(false);
                     } catch (err) {
                         console.error(err);
@@ -218,14 +215,10 @@ export const RegisterForm = () => {
                             </Grid>
                             <Grid item xs={12}>
                                 <Typography variant="body2">
-                                    Ao se cadastrar, você concorda com nossos &nbsp;
-                                    <Link variant="subtitle2" component={Link} href="#">
-                                        Termos de Uso
-                                    </Link>
-                                    &nbsp; e nossa &nbsp;
-                                    <Link variant="subtitle2" component={Link} href="#">
-                                        Política de Privacidade
-                                    </Link>
+                                    <span>Ao se cadastrar, você concorda com nossos </span>
+                                    <Link variant="subtitle2" component={Link} href="#" color='secondary'>Termos de Uso</Link>
+                                    <span> e nossa </span>
+                                    <Link variant="subtitle2" component={Link} href="#" color='secondary'>Política de Privacidade</Link>
                                 </Typography>
                             </Grid>
                             {errors.submit && (
