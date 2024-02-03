@@ -30,7 +30,7 @@ git clone https://github.com/inclusivi/r-tea.git
 2. Instale as dependências:
 
 ```bash
-cd univesp-pi-rtea-frontend
+cd r-tea
 npm install
 ```
 
