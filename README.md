@@ -24,7 +24,7 @@ Antes de começar, assegure-se de ter os seguintes requisitos instalados:
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/felipe-louzas/univesp-pi-rtea-frontend.git
+git clone https://github.com/inclusivi/r-tea.git
 ```
 
 2. Instale as dependências:
