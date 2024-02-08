@@ -3,8 +3,9 @@ import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar } from "@mui/material";
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuthContext } from '../auth/AuthContext';
-
-
+/*EDuardo mexue aqui*/
+import { fecharmenudependentes } from '../Eduardo.S.C-contribuição';
+/*fim Eduardo Stivanin Calvino mexeu*/
 const drawerWidth = 240;
 
 interface Props {
