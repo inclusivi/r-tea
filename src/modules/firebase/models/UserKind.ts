@@ -5,6 +5,8 @@ export enum UserKind {
     ProfissionalSaude = "profissional_saude",
     Cuidador = "cuidador",
     Educador = "educador",
+    PessoaAutista = "pessoa_autista",
+    PessoaSemDiagnostico = "pessoa_sem_diagnostico",
 }
 
 export const AllUserKinds = [
@@ -13,6 +15,8 @@ export const AllUserKinds = [
     { value: UserKind.ProfissionalSaude, label: 'Profissional de Saúde' },
     { value: UserKind.Cuidador, label: 'Cuidador' },
     { value: UserKind.Educador, label: 'Educador' },
+    { value: UserKind.PessoaAutista, label: 'Pessoa com Autismo' },
+    { value: UserKind.PessoaSemDiagnostico, label: 'Pessoa sem Diagnóstico' },
 ]
 
 export const UserKindDescriptions = {
@@ -22,4 +26,6 @@ export const UserKindDescriptions = {
     [UserKind.ProfissionalSaude]: 'Profissional de Saúde',
     [UserKind.Cuidador]: 'Cuidador',
     [UserKind.Educador]: 'Educador',
+    [UserKind.PessoaAutista]: 'Pessoa com Autismo',
+    [UserKind.PessoaSemDiagnostico]: 'Pessoa sem Diagnóstico',
 }
