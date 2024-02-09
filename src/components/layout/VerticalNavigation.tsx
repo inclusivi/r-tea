@@ -4,7 +4,7 @@ import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuthContext } from '../auth/AuthContext';
 /*EDuardo mexue aqui*/
-import { fecharmenudependentes } from '../Eduardo.S.C-contribuição';
+import { fecharmenudependentes } from '../Eduardo.S.C-contribuição/page.ts';
 /*fim Eduardo Stivanin Calvino mexeu*/
 const drawerWidth = 240;
 
