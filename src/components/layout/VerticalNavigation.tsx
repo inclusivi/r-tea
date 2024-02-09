@@ -4,7 +4,7 @@ import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuthContext } from '../auth/AuthContext';
 /*EDuardo mexue aqui*/
-import { fecharmenudependentes } from '../Eduardo.S.C-contribuição/page.ts';
+import { fecharmenudependentes } from './Eduardo.S.C-contribuição/page.ts';
 /*fim Eduardo Stivanin Calvino mexeu*/
 const drawerWidth = 240;
 
@@ -82,4 +82,19 @@ export default function VerticalNavigation(props: Props) {
             </Drawer>
         </>
     )
+
+
+
+
+//parte que eEduarod mexeu
+//parte minha pra fechjar se fora autista nop teste pus conmo verdeirto essa condiição
+try {//tanto faz ovtrue or false se for do tipo fatexto o boleano
+  console.log(fecharmenudependentes("true", menusome))
+} 
+catch (error) {
+ //se erro avisar oque é 
+ console.error("Deu erro texto sem aspas "+error)
+   
+}
+// fim parte que eEduardoi mexeu
 }
