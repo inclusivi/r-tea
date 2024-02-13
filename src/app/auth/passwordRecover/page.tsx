@@ -1,4 +1,4 @@
-import { PasswordRecoverForm } from "@/components/auth/PasswordRecoverForm.tsx";
+import { PasswordRecoverForm } from "@/components/auth/PasswordRecoverForm";
 import { Grid, Stack, Typography } from "@mui/material"
 
 

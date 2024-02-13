@@ -4,7 +4,7 @@ import Link from "next/link";
 import { RegisterForm } from "@/components/auth/RegisterForm";
 
 
-const LoginPage = () => {
+const RegisterPage = () => {
     return (
         <Grid container spacing={3}>
             <Grid item xs={12}>
@@ -22,4 +22,4 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage;
+export default RegisterPage;
