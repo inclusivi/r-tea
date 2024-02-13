@@ -1,9 +1,8 @@
-import { PasswordRecoverForm } from "@/components/auth/passwordRecoverForm";
+import { PasswordRecoverForm } from "@/components/auth/PasswordRecoverForm.tsx";
 import { Grid, Stack, Typography } from "@mui/material"
-import Link from "next/link"
 
 
-const loginPage = () => {
+const PasswordRecoverPage = () => {
     return (
         <Grid container spacing={3}>
             <Grid item xs={12}>
@@ -19,4 +18,4 @@ const loginPage = () => {
     )
 }
 
-export default loginPage;
+export default PasswordRecoverPage;

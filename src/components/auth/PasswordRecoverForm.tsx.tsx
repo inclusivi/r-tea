@@ -1,6 +1,5 @@
 import { Button, Grid, InputLabel, OutlinedInput, Stack } from "@mui/material"
 import { AnimateButton } from "../shared/elements/AnimatedButton"
-import { Padding } from "@mui/icons-material"
 
 
 export const PasswordRecoverForm = () => {
