@@ -16,20 +16,20 @@ export class ProfileRepo {
     ) {}
 
     get avatarPath(): string {
-        return `public/profile/${this.user.uid}/avatar`;
+        return `public/profile/${this.firebaseUser.uid}/avatar`;
     }
 
     get profileCoverPath(): string {
-        return `public/profile/${this.user.uid}/cover`;
+        return `public/profile/${this.firebaseUser.uid}/cover`;
     }
 
     get userProfileDocumentPath(): string {
-        return `/profiles/${this.user.uid}`;
+        return `/profiles/${this.firebaseUser.uid}`;
     }
 
     async setProfilePhoto(file: File) {
         const fileUrl = await saveFile(this.avatarPath, file);
-        await setUserAvatar(this.user, fileUrl);
+        await setUserAvatar(this.firebaseUser, fileUrl);
         await this.updateUserProfile({
             photoUrl: fileUrl,
         });
@@ -37,7 +37,7 @@ export class ProfileRepo {
     
     async removeProfilePhoto() {
         await deleteFile(this.avatarPath);
-        await setUserAvatar(this.user, null);
+        await setUserAvatar(this.firebaseUser, null);
         await this.updateUserProfile({
             photoUrl: null,
         });
@@ -66,13 +66,13 @@ export class ProfileRepo {
     }
 
     async updateBasicInfo(nome: string, sobrenome: string, selectedUf?: UF, selectedMunicipio?: Municipio) {
-        await updateProfile(this.user, {
+        await updateProfile(this.firebaseUser, {
             displayName: `${nome} ${sobrenome}`,
         });
         
         await this.updateUserProfile({
-            userId: this.user.uid,
-            email: this.user.email,
+            userId: this.firebaseUser.uid,
+            email: this.firebaseUser.email,
             firstName: nome,
             lastName: sobrenome,
             ufId: selectedUf?.id ?? null,
