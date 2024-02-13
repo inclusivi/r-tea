@@ -1,4 +1,3 @@
-import { User, updateProfile } from "firebase/auth";
 import { deleteFile, saveFile } from "../services/storage";
 import { setUserAvatar } from "../services/auth";
 import { loadDocument, loadDocuments, updateDocument } from "../services/database";
@@ -7,8 +6,12 @@ import { UserKind } from "../models/UserKind";
 import { Municipio, UF } from "@/modules/ibge/types";
 import { and, or, where } from "firebase/firestore";
 
+import { User as FirebaseUser, updateProfile } from "firebase/auth";
+import { User } from "@/modules/user/UserInfo";
+
 export class ProfileRepo {
     constructor(
+        private readonly firebaseUser: FirebaseUser,
         private readonly user: User
     ) {}
 
