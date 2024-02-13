@@ -30,10 +30,10 @@ menumaeautismo[0].classList.remove("mui-1evlaxh")
 
 //exibi r vairiavel que contem o menu
 //console.log(menusome)
+//se usuario é autista exiba código script de jkavascriptpra apgar menu
 
-
-//se usuario é autista
-fecharmenudependentes("true", menusome) 
+console.log(fecharmenudependentes(true, menusome))
+//erro aqui trava o R-tea somente true ou false como boleenao ou string tamnto faz
 /*
 
 
@@ -68,9 +68,10 @@ function fecharmenudependentes(usuarioautista:String, menucomando) {
  //fecharmenudependentes()
 
   //se valor invçlido for um numero,ou texot com aspas
-else {//se valor invlaido 
-
-return "Valor inválido: "+usuarioautista
+else {
+//se valor invalido 
+//tratamento de erro pra naõ travar o site
+return `Valor inválido:`
   }
 
 
