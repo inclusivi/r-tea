@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, Grid, InputLabel, OutlinedInput, Stack } from "@mui/material";
 import { AnimateButton } from "../shared/elements/AnimatedButton";
 import React from "react";
