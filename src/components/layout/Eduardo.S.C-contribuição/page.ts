@@ -2,6 +2,13 @@
 //import { frFR } from "@mui/material/locale"
 //import { trTR } from "@mui/x-data-grid"
 //creted by Eduardo S. C. form SP/BR
+//import './globals.css'
+//import { AuthContextProvider } from '@/components/auth/AuthContext'
+//import ThemeRegistry from '@/components/theme/ThemeRegistry'
+//import { darkTheme } from '@/components/theme/default'
+//import type { Metadata } from 'next'
+
+
 console.log("script conectado")
 
 //ag a 
@@ -9,6 +16,7 @@ console.log("script conectado")
 <script>
 const menumaeautismo= document.getElementsByClassName("MuiDrawer-paper")
 menumaeautismo[0]
+
 
 //apaga a divisorio ,tudo dentro dela
 menumaeautismo[0].innerText=""
@@ -18,13 +26,17 @@ menumaeautismo[0].removeChild("MuiPaper-root")
 menumaeautismo[0].classList.remove("mui-1evlaxh")
 </script>
 `
+
+
+//exibi r vairiavel que contem o menu
+//console.log(menusome)
+
+
+//se usuario é autista
+fecharmenudependentes("true", menusome) 
 /*
 
-import './globals.css'
-import { AuthContextProvider } from '@/components/auth/AuthContext'
-import ThemeRegistry from '@/components/theme/ThemeRegistry'
-import { darkTheme } from '@/components/theme/default'
-import type { Metadata } from 'next'
+
 //ternario consifççaõ se verdadeiro
 */
 // gera script no Frointed que  apga erro do no fornte apaga o menu
