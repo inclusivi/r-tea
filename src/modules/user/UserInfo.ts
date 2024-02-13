@@ -23,7 +23,7 @@ export interface UserInfo {
 }
 
 export class User {
-    private _profile: UserProfile | null = null;
+    public _profile: UserProfile | null = null;
 
     constructor(private readonly userInfo: UserInfo) {}
 
@@ -63,7 +63,7 @@ export class User {
     }
 
     async loadProfile(): Promise<void> {
-        const repo = await getProfileRepository();
+        const repo = await getProfileRepository(this);
         this._profile = await repo.getProfile();
     }
 
