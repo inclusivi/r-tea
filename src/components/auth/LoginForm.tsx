@@ -147,7 +147,7 @@ export const LoginForm = () => {
                     }
                     label={<Typography variant="h6">Permanecer logado</Typography>}
                   />
-                  <Link variant="h6" href="" color="text.primary">
+                  <Link variant="h6" href="../auth/passwordRecover" color="text.primary">
                     Esqueceu a senha?
                   </Link>
                 </Stack>
