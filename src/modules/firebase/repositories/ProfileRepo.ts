@@ -39,6 +39,8 @@ export class ProfileRepo {
         await this.updateUserProfile({
             photoUrl: fileUrl,
         });
+
+        await this.updatePessoaIfAutisticOrInDiscover({ photoUrl: fileUrl });
     }
     
     async removeProfilePhoto() {
@@ -47,6 +49,9 @@ export class ProfileRepo {
         await this.updateUserProfile({
             photoUrl: null,
         });
+
+        await this.updatePessoaIfAutisticOrInDiscover({ photoUrl: '' });
+
     }
 
     async setCoverPhoto(file: File) {
@@ -136,6 +141,9 @@ export class ProfileRepo {
         await this.updateUserProfile({
             introText: intro,
         });
+
+        await this.updatePessoaIfAutisticOrInDiscover({ bio: intro });
+
     }
     
 
