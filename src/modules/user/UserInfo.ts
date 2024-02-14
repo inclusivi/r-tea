@@ -23,7 +23,7 @@ export interface UserInfo {
 }
 
 export class User {
-    public _profile: UserProfile | null = null;
+    private _profile: UserProfile | null = null;
 
     constructor(private readonly userInfo: UserInfo) {}
 
