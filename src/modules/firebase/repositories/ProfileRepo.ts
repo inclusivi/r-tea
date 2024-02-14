@@ -69,6 +69,24 @@ export class ProfileRepo {
         await this.updateUserProfile({
             userKind,
         });
+
+        if (userKind === UserKind.PessoaAutista || userKind === UserKind.PessoaSemDiagnostico) {
+            
+            const profile = this.user
+
+            if(!profile){
+                return;
+            }
+
+            await this.pessoaRepo.addPessoa({
+                id: '',
+                responsavelUid: profile.uid,
+                nome: profile.firstName || '',
+                sobreNome: profile.lastName || '',
+                genero: '',
+                dataNascimento: '',
+            });
+        };
     }
 
     async updateBasicInfo(nome: string, sobrenome: string, selectedUf?: UF, selectedMunicipio?: Municipio) {
