@@ -85,6 +85,9 @@ export class ProfileRepo {
                 sobreNome: profile.lastName || '',
                 genero: '',
                 dataNascimento: '',
+                bio: '',
+                photoUrl: '',
+                convidados: [],
             });
         };
     }
@@ -105,6 +108,22 @@ export class ProfileRepo {
             municipioId: selectedMunicipio?.id ?? null,
             municipioName: selectedMunicipio?.nome ?? null,
         });
+
+        const profile = this.user.profile
+
+        if(profile.userKind === UserKind.PessoaAutista || profile.userKind === UserKind.PessoaSemDiagnostico){
+            const pessoas = await this.pessoaRepo.getPessoas();
+            const pessoa = pessoas[0]
+
+            await this.pessoaRepo.addPessoa({
+                id: pessoa.id,
+                responsavelUid: pessoa.responsavelUid,
+                nome: nome,
+                sobreNome: sobrenome,
+                genero: pessoa.genero,
+                dataNascimento: pessoa.dataNascimento,
+            });
+        };
     }
 
     async updateBio(intro: string) {
