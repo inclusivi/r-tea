@@ -2,6 +2,7 @@ import { deleteFile, saveFile } from "../services/storage";
 import { setUserAvatar } from "../services/auth";
 import { loadDocument, loadDocuments, updateDocument } from "../services/database";
 import { UserProfile } from "../models/UserProfile";
+import { Pessoa } from "../models/Pessoa";
 import { UserKind } from "../models/UserKind";
 import { Municipio, UF } from "@/modules/ibge/types";
 import { and, or, where } from "firebase/firestore";
@@ -10,7 +11,6 @@ import { User as FirebaseUser, updateProfile } from "firebase/auth";
 import { User } from "@/modules/user/UserInfo";
 
 import { PessoaRepo } from "./PessoaRepo";
-
 export class ProfileRepo {
     private pessoaRepo: PessoaRepo;
 
@@ -109,6 +109,11 @@ export class ProfileRepo {
             municipioName: selectedMunicipio?.nome ?? null,
         });
 
+        await this.updatePessoaIfAutisticOrInDiscover({ nome, sobreNome: sobrenome });
+        
+    }
+
+    async updatePessoaIfAutisticOrInDiscover(data: Partial<Pessoa>){
         const profile = this.user.profile
 
         if(profile.userKind === UserKind.PessoaAutista || profile.userKind === UserKind.PessoaSemDiagnostico){
@@ -118,10 +123,11 @@ export class ProfileRepo {
             await this.pessoaRepo.addPessoa({
                 id: pessoa.id,
                 responsavelUid: pessoa.responsavelUid,
-                nome: nome,
-                sobreNome: sobrenome,
+                nome: data.nome ?? pessoa.nome,
+                sobreNome: data.sobreNome ?? pessoa.sobreNome,
                 genero: pessoa.genero,
                 dataNascimento: pessoa.dataNascimento,
+                ...data
             });
         };
     }
