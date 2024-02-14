@@ -116,7 +116,7 @@ export default function UserConfigPage() {
             }
             const fileList = e.target.files;
 
-            const profileRepo = await getProfileRepository();
+            const profileRepo = await getProfileRepository(user!);
             await profileRepo.setProfilePhoto(fileList[0]);
             await reloadUser();
         } finally {
@@ -127,7 +127,7 @@ export default function UserConfigPage() {
     const handleAvatarRemove = async () => {
         setLoading(true);
         try {
-            const profileRepo = await getProfileRepository();
+            const profileRepo = await getProfileRepository(user!);
             await profileRepo.removeProfilePhoto();
             await reloadUser();
         } finally {
@@ -138,7 +138,7 @@ export default function UserConfigPage() {
     const handleCoverUpload = async (file: File) => {
         setCoverLoading(true);
         try {
-            const profileRepo = await getProfileRepository();
+            const profileRepo = await getProfileRepository(user!);
             await profileRepo.setCoverPhoto(file);
             await reloadUser();
         } finally {
@@ -149,7 +149,7 @@ export default function UserConfigPage() {
     const handleCoverRemove = async () => {
         setCoverLoading(true);
         try {
-            const profileRepo = await getProfileRepository();
+            const profileRepo = await getProfileRepository(user!);
             await profileRepo.removeCoverPhoto();
             await reloadUser();
         } finally {
@@ -160,7 +160,7 @@ export default function UserConfigPage() {
     const handleBasicInfoSave = async () => {
         setLoading(true);
         try {
-            const profileRepo = await getProfileRepository();
+            const profileRepo = await getProfileRepository(user!);
             const uf = estados!.filter(uf => uf.id == selectedUf)[0];
             const municipio = municipios!.filter(municipio => municipio.id == selectedMunicipio)[0];
             await profileRepo.updateBasicInfo(nome, sobrenome, uf, municipio);
@@ -173,7 +173,7 @@ export default function UserConfigPage() {
     const handleBioSave = async () => {
         setLoading(true);
         try {
-            const profileRepo = await getProfileRepository();
+            const profileRepo = await getProfileRepository(user!);
             await profileRepo.updateBio(intro);
             await reloadUser();
         } finally {

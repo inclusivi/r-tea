@@ -63,7 +63,7 @@ function ChoiceCard({ title, description, image, value, selected, onClick }: {
 
 export default function WelcomePage() {
     const router = useRouter();
-    const { reloadUser } = useAuthContext();
+    const { user, reloadUser } = useAuthContext();
 
     const [selectedUserKind, setSelectedUserKind] = useState<UserKind | null>(null);
     const [loading, setLoading] = useState(false);
@@ -79,7 +79,7 @@ export default function WelcomePage() {
 
         setLoading(true);
         try {
-            const profileRepo = await getProfileRepository();
+            const profileRepo = await getProfileRepository(user!);
             await profileRepo.updateUserKind(selectedUserKind);
             await reloadUser();
             router.push('/user/config');

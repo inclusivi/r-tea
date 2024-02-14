@@ -63,7 +63,7 @@ export class User {
     }
 
     async loadProfile(): Promise<void> {
-        const repo = await getProfileRepository();
+        const repo = await getProfileRepository(this);
         this._profile = await repo.getProfile();
     }
 
