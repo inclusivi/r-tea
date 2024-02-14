@@ -9,11 +9,17 @@ import { and, or, where } from "firebase/firestore";
 import { User as FirebaseUser, updateProfile } from "firebase/auth";
 import { User } from "@/modules/user/UserInfo";
 
+import { PessoaRepo } from "./PessoaRepo";
+
 export class ProfileRepo {
+    private pessoaRepo: PessoaRepo;
+
     constructor(
         private readonly firebaseUser: FirebaseUser,
         private readonly user: User
-    ) {}
+    ) {
+        this.pessoaRepo = new PessoaRepo(user);
+    }
 
     get avatarPath(): string {
         return `public/profile/${this.firebaseUser.uid}/avatar`;
