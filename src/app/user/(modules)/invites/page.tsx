@@ -22,7 +22,7 @@ type SituacaoConvite = 'pending' | 'accepted' | 'none';
 type ProfileCardProps = {
     profile: UserProfile,
     situacaoConvite: SituacaoConvite,
-    onInvite: (userId: string) => void
+    onInvite: (userId: string) => void,
 }
 
 type ButtonVariant = 'outlined' | 'contained' | 'text';
@@ -196,7 +196,7 @@ export default function InvitesPage() {
             <Typography variant="h3" color='primary'>Enviar Convite</Typography>
             <Divider sx={{ mt: 1, mb: 3 }} />
 
-            <PersonPicker label="Visualizando convites para" pessoas={pessoas} selectedPerson={selectedPerson ?? pessoas[0]} onChange={handlePersonChange} />
+            <PersonPicker label="Visualizando convites para" pessoas={pessoas} selectedPerson={selectedPerson ?? pessoas[0]} userKind={userKind} onChange={handlePersonChange} />
 
             {profiles.length === 0
                 ? (
