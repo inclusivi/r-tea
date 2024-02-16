@@ -18,6 +18,7 @@ export default function RegistrosPage() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const { userCtx } = useAuthContext();
+    const userKind = userCtx.user.profile.userKind!;
 
     const [loading, setLoading] = React.useState(true);
     const [pessoas, setPessoas] = React.useState<Pessoa[]>([]);
