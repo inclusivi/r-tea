@@ -26,7 +26,7 @@ export default function ConvitesPage() {
             const repo = new PessoaRepo(userCtx.user);
             const pessoas = await repo.getPessoasPendingInvite();
 
-            const profileRepo = await getProfileRepository();
+            const profileRepo = await getProfileRepository(userCtx.user);
             const profiles = await profileRepo.getProfiles([UserKind.Responsavel]);
 
             setPessoas(pessoas);
