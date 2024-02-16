@@ -15,7 +15,7 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 export default function ConvitesPage() {
     const { userCtx } = useAuthContext();
-
+    
     const [loading, setLoading] = React.useState(true);
     const [pending, setPending] = React.useState(false);
     const [pessoas, setPessoas] = React.useState<Pessoa[]>([]);

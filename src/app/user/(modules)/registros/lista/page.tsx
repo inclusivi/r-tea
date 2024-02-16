@@ -18,6 +18,7 @@ export default function RegistrosPage() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const { userCtx } = useAuthContext();
+    const userKind = userCtx.user.profile.userKind!;
 
     const [loading, setLoading] = React.useState(true);
     const [pessoas, setPessoas] = React.useState<Pessoa[]>([]);
@@ -80,7 +81,7 @@ export default function RegistrosPage() {
             <Typography variant="h3" color='primary'>Registros</Typography>
             <Divider sx={{ mt: 1, mb: 3 }} />
 
-            <PersonPicker label="Visualizando registros para" pessoas={pessoas} selectedPerson={selectedPerson} onChange={handlePersonChange} />
+            <PersonPicker label="Visualizando registros para" pessoas={pessoas} selectedPerson={selectedPerson} userKind={userKind} onChange={handlePersonChange} />
 
             {registros.length === 0
                 ? (<EmptyState message="Nenhum registro encontrado" action="Adicionar registro" link={`/user/registros/novo?id=${selectedPerson.id}`} />)

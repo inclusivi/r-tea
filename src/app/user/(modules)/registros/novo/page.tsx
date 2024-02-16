@@ -20,6 +20,7 @@ export default function AddRecordPage() {
     const [selectedPersonId, setSelectedPersonId] = React.useState('');
     const [loading, setLoading] = React.useState(true);
     const [pending, setPending] = React.useState(false);
+    const userKind = userCtx.user.profile.userKind!;
     
 
     React.useEffect(() => {
@@ -60,7 +61,7 @@ export default function AddRecordPage() {
             <LoadingModal visible={pending} />
             <Typography variant="h3" color='primary'>Novo Registro</Typography>
             <Divider sx={{ mt: 1, mb: 3 }} />
-            <PersonPicker label="Adicionando registro para" pessoas={pessoas} selectedPerson={selectedPerson} onChange={handlePersonChange} />
+            <PersonPicker label="Adicionando registro para" pessoas={pessoas} selectedPerson={selectedPerson} userKind={userKind} onChange={handlePersonChange} />
             <Box mt={3}>
                 <ObservacoesTree data={observacoes} pessoa={selectedPerson} onGravarRegistro={handleGravarRegistro}/>
             </Box>
