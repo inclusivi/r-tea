@@ -95,7 +95,7 @@ export default function InvitesPage() {
             const repo = new PessoaRepo(userCtx.user);
             const pessoas = await repo.getPessoas();
 
-            const profileRepo = await getProfileRepository();
+            const profileRepo = await getProfileRepository(userCtx.user);
             const profiles = await profileRepo.getProfiles([UserKind.ProfissionalSaude, UserKind.Educador, UserKind.Cuidador]);
 
             setPessoas(pessoas);
