@@ -2,6 +2,7 @@
 import { signInWithEmailAndPassword, getAuth, createUserWithEmailAndPassword, updateProfile, User, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
 import { firebaseApp } from "../config";
 import { ProfileRepo } from "../repositories/ProfileRepo";
+import { updateDocument } from "./database";
 
 const auth = getAuth(firebaseApp);
 
@@ -16,8 +17,22 @@ export async function logout() {
 export async function register(email: string, password: string, firstName: string, lastName: string): Promise<void> {
     const cred = await createUserWithEmailAndPassword(auth, email, password);
 
-    const profileRepo = new ProfileRepo(cred.user)
-    await profileRepo.updateBasicInfo(firstName, lastName)
+    await updateProfile(cred.user, {
+        displayName: `${firstName} ${lastName}`,
+    });
+
+    updateDocument(`/profiles/${cred.user.uid}`, {
+        userId: cred.user.uid,
+        email: cred.user.email,
+        firstName: firstName,
+        lastName: lastName,
+        ufId: null,
+        ufName: null,
+        ufSigla: null,
+        municipioId: null,
+        municipioName: null,
+    });
+    
 }
 
 export async function setUserAvatar(user: User, photoUrl: string | null) {
