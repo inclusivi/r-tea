@@ -4,6 +4,8 @@ import parents from '@/assets/images/icons/parents.png';
 import babysitter from '@/assets/images/icons/babysitter.png';
 import teacher from '@/assets/images/icons/teacher.png';
 import therapist from '@/assets/images/icons/therapist.png';
+import autistic from '@/assets/images/icons/autisticPerson2.png';
+import personInDiscover from '@/assets/images/icons/personInDiscover.png';
 
 
 import { useState } from "react";
@@ -61,7 +63,7 @@ function ChoiceCard({ title, description, image, value, selected, onClick }: {
 
 export default function WelcomePage() {
     const router = useRouter();
-    const { reloadUser } = useAuthContext();
+    const { user, reloadUser } = useAuthContext();
 
     const [selectedUserKind, setSelectedUserKind] = useState<UserKind | null>(null);
     const [loading, setLoading] = useState(false);
@@ -77,7 +79,7 @@ export default function WelcomePage() {
 
         setLoading(true);
         try {
-            const profileRepo = await getProfileRepository();
+            const profileRepo = await getProfileRepository(user!);
             await profileRepo.updateUserKind(selectedUserKind);
             await reloadUser();
             router.push('/user/config');
@@ -127,6 +129,22 @@ export default function WelcomePage() {
                     selected={selectedUserKind}
                     onClick={handleUserKindClick}
                     image={babysitter}
+                />
+                <ChoiceCard
+                    title="Pessoa Autista"
+                    description="Autistas adultos. Permite adicionar e acompanhar os próprios registros e informações, além de gerenciar o compartilhamento do perfil com outros usuários."
+                    value={UserKind.PessoaAutista}
+                    selected={selectedUserKind}
+                    onClick={handleUserKindClick}
+                    image={autistic}
+                />
+                <ChoiceCard
+                    title="Jornada de Descoberta"
+                    description="Aquelas pessoas que ainda estão em sua jornada de descoberta e querem experimentar a plataforma, mas ainda não têm um diagnóstico definido. Dá acesso as mesmas funções que a pessoa autista."
+                    value={UserKind.PessoaSemDiagnostico}
+                    selected={selectedUserKind}
+                    onClick={handleUserKindClick}
+                    image={personInDiscover}
                 />
             </Grid>
 

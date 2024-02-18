@@ -24,7 +24,7 @@ export default function ProfilesPage() {
             const pessoaId = searchParams.get('id');
             if (!pessoaId) return;
 
-            const repo = await getProfileRepository();
+            const repo = await getProfileRepository(userCtx.user);
             const pessoa = await repo.getProfileForId(pessoaId);
             setProfile(pessoa);
 

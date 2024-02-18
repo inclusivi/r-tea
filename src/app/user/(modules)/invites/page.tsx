@@ -22,7 +22,7 @@ type SituacaoConvite = 'pending' | 'accepted' | 'none';
 type ProfileCardProps = {
     profile: UserProfile,
     situacaoConvite: SituacaoConvite,
-    onInvite: (userId: string) => void
+    onInvite: (userId: string) => void,
 }
 
 type ButtonVariant = 'outlined' | 'contained' | 'text';
@@ -80,6 +80,7 @@ export default function InvitesPage() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const { userCtx } = useAuthContext();
+    const userKind = userCtx.user.profile.userKind!;
 
     const [loading, setLoading] = React.useState(true);
     const [pending, setPending] = React.useState(false);
@@ -94,7 +95,7 @@ export default function InvitesPage() {
             const repo = new PessoaRepo(userCtx.user);
             const pessoas = await repo.getPessoas();
 
-            const profileRepo = await getProfileRepository();
+            const profileRepo = await getProfileRepository(userCtx.user);
             const profiles = await profileRepo.getProfiles([UserKind.ProfissionalSaude, UserKind.Educador, UserKind.Cuidador]);
 
             setPessoas(pessoas);
@@ -196,7 +197,7 @@ export default function InvitesPage() {
             <Typography variant="h3" color='primary'>Enviar Convite</Typography>
             <Divider sx={{ mt: 1, mb: 3 }} />
 
-            <PersonPicker label="Visualizando convites para" pessoas={pessoas} selectedPerson={selectedPerson ?? pessoas[0]} onChange={handlePersonChange} />
+            <PersonPicker label="Visualizando convites para" pessoas={pessoas} selectedPerson={selectedPerson ?? pessoas[0]} userKind={userKind} onChange={handlePersonChange} />
 
             {profiles.length === 0
                 ? (

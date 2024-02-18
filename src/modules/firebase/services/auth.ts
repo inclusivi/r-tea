@@ -3,6 +3,7 @@ import { signInWithEmailAndPassword, getAuth, createUserWithEmailAndPassword, up
 import { firebaseApp } from "../config";
 import { ProfileRepo } from "../repositories/ProfileRepo";
 import { User } from "@/modules/user/UserInfo";
+import { updateDocument } from "./database";
 
 const auth = getAuth(firebaseApp);
 
@@ -17,8 +18,22 @@ export async function logout() {
 export async function register(email: string, password: string, firstName: string, lastName: string): Promise<void> {
     const cred = await createUserWithEmailAndPassword(auth, email, password);
 
-    const profileRepo = new ProfileRepo(cred.user)
-    await profileRepo.updateBasicInfo(firstName, lastName)
+    await updateProfile(cred.user, {
+        displayName: `${firstName} ${lastName}`,
+    });
+
+    updateDocument(`/profiles/${cred.user.uid}`, {
+        userId: cred.user.uid,
+        email: cred.user.email,
+        firstName: firstName,
+        lastName: lastName,
+        ufId: null,
+        ufName: null,
+        ufSigla: null,
+        municipioId: null,
+        municipioName: null,
+    });
+    
 }
 
 export async function setUserAvatar(user: FirebaseUser, photoUrl: string | null) {
