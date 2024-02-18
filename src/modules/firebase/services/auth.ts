@@ -1,7 +1,8 @@
 
-import { signInWithEmailAndPassword, getAuth, createUserWithEmailAndPassword, updateProfile, User, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
+import { signInWithEmailAndPassword, getAuth, createUserWithEmailAndPassword, updateProfile, User as FirebaseUser, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
 import { firebaseApp } from "../config";
 import { ProfileRepo } from "../repositories/ProfileRepo";
+import { User } from "@/modules/user/UserInfo";
 import { updateDocument } from "./database";
 
 const auth = getAuth(firebaseApp);
@@ -35,17 +36,18 @@ export async function register(email: string, password: string, firstName: strin
     
 }
 
-export async function setUserAvatar(user: User, photoUrl: string | null) {
+export async function setUserAvatar(user: FirebaseUser, photoUrl: string | null) {
     await updateProfile(user, {
         photoURL: photoUrl ?? '',
     });
 }
 
 export async function changePassword(user: User, oldPassword: string, newPassword: string) {
+    const firebaseUser = auth.currentUser
     const oldCredentials = EmailAuthProvider.credential(
         user.email!,
         oldPassword
     )
-    const credential = await reauthenticateWithCredential(user, oldCredentials);
+    const credential = await reauthenticateWithCredential(firebaseUser!, oldCredentials);
     await updatePassword(credential.user, newPassword);
 }
