@@ -1,27 +1,19 @@
-import './globals.css'
-import { AuthContextProvider } from '@/components/auth/AuthContext'
-import ThemeRegistry from '@/components/theme/ThemeRegistry'
-import { darkTheme } from '@/components/theme/default'
-import type { Metadata } from 'next'
+'use client';
 
-export const metadata: Metadata = {
-  title: 'R-TEA | Rastreamento Comportamental de Pessoas Autistas'
-}
+import { useAuthContext } from "@/components/auth/AuthContext";
+import AppLayout from "@/components/layout/AppLayout";
+import React from "react";
 
-export default function RootLayout({
-  children,
+const UserLayout = ({
+    children,
 }: {
-  children: React.ReactNode
-}) {
-  return (
-    <html lang="pt">
-      <body>
-        <ThemeRegistry options={{ key: 'mui' }} theme={darkTheme}>
-          <AuthContextProvider>
+    children: React.ReactNode
+}) => {
+    return (
+        <AppLayout navigation={false}>
             {children}
-          </AuthContextProvider>
-        </ThemeRegistry>
-      </body>
-    </html>
-  )
-}
+        </AppLayout>
+    )
+};
+
+export default UserLayout;
