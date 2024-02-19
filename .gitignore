@@ -39,3 +39,5 @@ next-env.d.ts
 nbproject
 .project
 *.ods
+
+/.vs

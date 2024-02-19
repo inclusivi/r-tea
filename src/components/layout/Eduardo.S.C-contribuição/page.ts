@@ -37,7 +37,7 @@ console.log(String(fecharmenudependentes("true", menusome) ));
 //correção de  bugs com string
 //module.exports=;
 
-function fecharmenudependentes(usuarioautista:String, menucomando) {
+function fecharmenudependentes(usuarioautista:String, menucomando:String) {
   //:boolean converte pra texto pra evitar erro doutro valores
   usuarioautista=String(usuarioautista);
   
