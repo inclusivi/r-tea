@@ -37,7 +37,10 @@ next-env.d.ts
 #Netbeans
 /nbproject/
 nbproject
+#Eclipse
 .project
+
+#planilha do Libreoffice / Openffice
 *.ods
 
 /.vs

@@ -97,7 +97,9 @@ export default function VerticalNavigation(props: Props) {
 //catch (error) {
  //se erro avisar oque é 
 // console.error("Deu erro texto sem aspas "+error)
+// console.error("Deu erro texto sem aspas "+error)
    
+//}
 //}
 // fim parte que eEduardoi mexeu
 }
