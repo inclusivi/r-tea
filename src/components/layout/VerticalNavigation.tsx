@@ -17,12 +17,11 @@ export default function VerticalNavigation(props: Props) {
     const { userCtx } = useAuthContext();
     const router = useRouter();
     const currentPath = usePathname();
-/*código que Eduardo mexeu cria varivel pra  condicional*/
-//tipo de usuario 
+    /*código que Eduardo mexeu cria varivel pra  condicional*/
+    //tipo de usuario 
     const tipodeusuario=userCtx.user.profile.userKind;
+    /* fim Eduardo mexeu */
 
-
-/* fim Eduardo mexeu */
     const navigation = [
         { name: userCtx.labelPessoas, route: '/user/pessoas/lista', icon: PersonOutlineOutlinedIcon },
         { name: 'Registros', route: '/user/registros/lista', icon: AssignmentOutlinedIcon },
@@ -37,19 +36,20 @@ export default function VerticalNavigation(props: Props) {
             router.push(route);
         }
     }
-/*se usauario é autista renomear aaguar menu dependend eEduarod  mexeu aqui*/
+
+    /*se usauario é autista renomear aaguar menu dependend eEduarod  mexeu aqui*/
                                             //elemntodoarray[0]tipo 0       //indice do array
-function fecharmenudependentes(usuarioautista:typeof navigation[0] ,  index:number) {
-// se indece e pessoaAutista ou em pessoasemdiagnostico  é zero esconde esse menu que é o laterate
-    if (index==0 && (tipodeusuario==UserKind.PessoaAutista   || tipodeusuario==UserKind.PessoaSemDiagnostico)  ) {
-   return false  
-} 
-else {
-    return true
-}
-}
-/* fim eEduardo mexeu */
-const navContent = (
+    function fecharmenudependentes(usuarioautista:typeof navigation[0] ,  index:number) {
+    // se indece e pessoaAutista ou em pessoasemdiagnostico  é zero esconde esse menu que é o laterate
+        if (index==0 && (tipodeusuario==UserKind.PessoaAutista || tipodeusuario==UserKind.PessoaSemDiagnostico)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    /* fim eEduardo mexeu */
+
+    const navContent = (
         <Box sx={{ overflow: 'auto' }}>
             <List>
                 {/*Eduardo mexeu aqui*/}
