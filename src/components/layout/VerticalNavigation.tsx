@@ -3,6 +3,7 @@ import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar } from "@mui/material";
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuthContext } from '../auth/AuthContext';
+import { UserKind } from '@/modules/firebase/models/UserKind';
 
 
 const drawerWidth = 240;
@@ -16,7 +17,12 @@ export default function VerticalNavigation(props: Props) {
     const { userCtx } = useAuthContext();
     const router = useRouter();
     const currentPath = usePathname();
+/*código que Eduardo mexeu cria varivel pra  condicional*/
+//tipo de usuario 
+    const tipodeusuario=userCtx.user.profile.userKind;
 
+
+/* fim Eduardo mexeu */
     const navigation = [
         { name: userCtx.labelPessoas, route: '/user/pessoas/lista', icon: PersonOutlineOutlinedIcon },
         { name: 'Registros', route: '/user/registros/lista', icon: AssignmentOutlinedIcon },
@@ -31,11 +37,24 @@ export default function VerticalNavigation(props: Props) {
             router.push(route);
         }
     }
-
-    const navContent = (
+/*se usauario é autista renomear aaguar menu dependend eEduarod  mexeu aqui*/
+                                            //elemntodoarray[0]tipo 0       //indice do array
+function fecharmenudependentes(usuarioautista:typeof navigation[0] ,  index:number) {
+// se indece e pessoaAutista ou em pessoasemdiagnostico  é zero esconde esse menu que é o laterate
+    if (index==0 && (tipodeusuario==UserKind.PessoaAutista   || tipodeusuario==UserKind.PessoaSemDiagnostico)  ) {
+   return false  
+} 
+else {
+    return true
+}
+}
+/* fim eEduardo mexeu */
+const navContent = (
         <Box sx={{ overflow: 'auto' }}>
             <List>
-                {navigation.map((nav, index) => (
+                {/*Eduardo mexeu aqui*/}
+                {navigation.filter(fecharmenudependentes)
+                .map((nav, index) => (
                     <ListItem key={nav.name} disablePadding>
                         <ListItemButton onClick={() => handleNavigation(nav.route)}>
                             <ListItemIcon>
