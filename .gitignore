@@ -33,3 +33,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+#Netbeans
+nbproject
+#Eclipse
+.project
+#Visual Studio Code
+vscode
+#Visual Studio
+/.vs
+*.ods
+desktop.ini
+DS_Store
