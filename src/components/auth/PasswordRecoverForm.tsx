@@ -5,7 +5,7 @@ import { AnimateButton } from "../shared/elements/AnimatedButton"
 import React from "react";
 import * as Yup from 'yup';
 import { Formik } from "formik";
-
+import { sendPasswordChangeEmail } from "@/modules/firebase/services/auth";
 
 export const PasswordRecoverForm = () => {
     return (
@@ -18,7 +18,7 @@ export const PasswordRecoverForm = () => {
                     email: Yup.string().email('Deve ser e-mail válido').max(255).required('Favor fornecer seu e-mail')
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
-
+                    sendPasswordChangeEmail(values.email)
                 }}
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
