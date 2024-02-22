@@ -1,5 +1,5 @@
 
-import { signInWithEmailAndPassword, getAuth, createUserWithEmailAndPassword, updateProfile, User as FirebaseUser, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
+import { signInWithEmailAndPassword, getAuth, createUserWithEmailAndPassword, updateProfile, User as FirebaseUser, updatePassword, reauthenticateWithCredential, EmailAuthProvider, sendPasswordResetEmail } from "firebase/auth";
 import { firebaseApp } from "../config";
 import { ProfileRepo } from "../repositories/ProfileRepo";
 import { User } from "@/modules/user/UserInfo";
@@ -50,4 +50,8 @@ export async function changePassword(user: User, oldPassword: string, newPasswor
     )
     const credential = await reauthenticateWithCredential(firebaseUser!, oldCredentials);
     await updatePassword(credential.user, newPassword);
+}
+
+export async function sendPasswordChangeEmail(email: string) {
+    await sendPasswordResetEmail(auth, email);
 }
