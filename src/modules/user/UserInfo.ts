@@ -1,6 +1,6 @@
 import cover from '@/assets/images/profile-cover.jpg';
 
-import {createHash} from 'crypto'
+import { createHash } from 'crypto'
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import { UserProfile } from '../firebase/models/UserProfile';
 import { getProfileRepository } from '../firebase';
@@ -63,7 +63,7 @@ export class User {
     }
 
     async loadProfile(): Promise<void> {
-        const repo = await getProfileRepository();
+        const repo = await getProfileRepository(this);
         this._profile = await repo.getProfile();
     }
 

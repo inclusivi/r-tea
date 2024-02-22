@@ -3,6 +3,7 @@
 import { Avatar, Box, Card, CardActionArea, CardContent, Menu, MenuItem, Typography } from "@mui/material";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { Pessoa } from "@/modules/firebase/models/Pessoa";
+import { UserKind } from "@/modules/firebase/models/UserKind"; 
 import React from "react";
 
 type PersonPickerProps = {
@@ -10,9 +11,10 @@ type PersonPickerProps = {
     pessoas: Pessoa[],
     selectedPerson: Pessoa,
     onChange: (pessoa: Pessoa) => void,
+    userKind: UserKind
 }
 
-export default function PersonPicker({ label, pessoas, selectedPerson, onChange }: PersonPickerProps) {
+export default function PersonPicker({ label, pessoas, selectedPerson, userKind, onChange }: PersonPickerProps) {
     
     const [personMenuAnchor, setPersonMenuAnchor] = React.useState<null | HTMLElement>(null);
 
@@ -22,6 +24,10 @@ export default function PersonPicker({ label, pessoas, selectedPerson, onChange 
     const handlePersonChange = (pessoa: Pessoa) => {
         setPersonMenuAnchor(null);
         onChange(pessoa);
+    }
+
+    if  (userKind === UserKind.PessoaAutista || userKind === UserKind.PessoaSemDiagnostico) {
+    return (<></>)
     }
 
     return (

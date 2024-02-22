@@ -3,7 +3,7 @@
 import { useAuthContext } from "@/components/auth/AuthContext";
 import { DefaultLoader } from "@/components/loading/DefaultLoader";
 import ImageDropper from "@/components/shared/widgets/imageDropper/ImageDropper";
-import { Avatar, Box, Button, Card, Divider, MenuItem, Modal, TextField, Typography } from "@mui/material";
+import { Alert, AlertColor, Avatar, Box, Button, Card, Divider, MenuItem, Modal, TextField, Typography } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import React, { useEffect } from "react";
 import { ChangeEvent } from "react";
@@ -13,6 +13,7 @@ import { AllUserKinds } from "@/modules/firebase/models/UserKind";
 import { Municipio, UF } from "@/modules/ibge/types";
 import { getCidades, getUFs } from "@/modules/ibge/localidades";
 import LoadingModal from "@/components/loading/LoadingModal";
+import { changePassword } from "@/modules/firebase/services/auth";
 
 interface ConfigSectionProps {
     title?: string;
@@ -72,6 +73,13 @@ export default function UserConfigPage() {
 
     const [intro, setIntro] = React.useState<string>(user!.profile.introText ?? '');
 
+    const [senhaAnterior, setSenhaAnterior] = React.useState<string>('');
+    const [novaSenha, setNovaSenha] = React.useState<string>('');
+    const [confirmaSenha, setConfirmaSenha] = React.useState<string>('');
+
+    const [alertaSenha, setAlertaSenha] = React.useState<string>('');
+    const [tipoAlerta, setTipoAlerta] = React.useState<AlertColor>();
+
     useEffect(() => {
         const loadEstados = async () => {
             const estados = await getUFs();
@@ -116,7 +124,7 @@ export default function UserConfigPage() {
             }
             const fileList = e.target.files;
 
-            const profileRepo = await getProfileRepository();
+            const profileRepo = await getProfileRepository(user!);
             await profileRepo.setProfilePhoto(fileList[0]);
             await reloadUser();
         } finally {
@@ -127,7 +135,7 @@ export default function UserConfigPage() {
     const handleAvatarRemove = async () => {
         setLoading(true);
         try {
-            const profileRepo = await getProfileRepository();
+            const profileRepo = await getProfileRepository(user!);
             await profileRepo.removeProfilePhoto();
             await reloadUser();
         } finally {
@@ -138,7 +146,7 @@ export default function UserConfigPage() {
     const handleCoverUpload = async (file: File) => {
         setCoverLoading(true);
         try {
-            const profileRepo = await getProfileRepository();
+            const profileRepo = await getProfileRepository(user!);
             await profileRepo.setCoverPhoto(file);
             await reloadUser();
         } finally {
@@ -149,7 +157,7 @@ export default function UserConfigPage() {
     const handleCoverRemove = async () => {
         setCoverLoading(true);
         try {
-            const profileRepo = await getProfileRepository();
+            const profileRepo = await getProfileRepository(user!);
             await profileRepo.removeCoverPhoto();
             await reloadUser();
         } finally {
@@ -160,7 +168,7 @@ export default function UserConfigPage() {
     const handleBasicInfoSave = async () => {
         setLoading(true);
         try {
-            const profileRepo = await getProfileRepository();
+            const profileRepo = await getProfileRepository(user!);
             const uf = estados!.filter(uf => uf.id == selectedUf)[0];
             const municipio = municipios!.filter(municipio => municipio.id == selectedMunicipio)[0];
             await profileRepo.updateBasicInfo(nome, sobrenome, uf, municipio);
@@ -173,7 +181,7 @@ export default function UserConfigPage() {
     const handleBioSave = async () => {
         setLoading(true);
         try {
-            const profileRepo = await getProfileRepository();
+            const profileRepo = await getProfileRepository(user!);
             await profileRepo.updateBio(intro);
             await reloadUser();
         } finally {
@@ -181,6 +189,29 @@ export default function UserConfigPage() {
         }
     };
 
+    const handleChangePassword = async () => {
+        setLoading(true);
+        setAlertaSenha('');
+        try {
+            if (novaSenha === confirmaSenha) {
+                await changePassword(user!, senhaAnterior, novaSenha);
+                setAlertaSenha('Sua senha foi alterada com sucesso!');
+                setTipoAlerta('success');
+                setSenhaAnterior('');
+                setNovaSenha('');
+                setConfirmaSenha('');
+            } else {
+                setAlertaSenha('As novas senhas informadas devem ser iguais!');
+                setTipoAlerta('error');
+            }
+        } catch (error) {
+            setAlertaSenha('Oops! Não foi possível alterar sua senha. Lembre-se de que sua senha deve conter no mínimo seis caracteres!');
+            setTipoAlerta('error');
+        } finally {
+            setLoading(false);
+        }
+    }
+                
     return (user &&
         <>
             <LoadingModal visible={loading} />
@@ -301,21 +332,25 @@ export default function UserConfigPage() {
 
             <ConfigSection title="Segurança" subtitle="Alteração de senha e autenticação de dois fatores">
                 <Typography variant="h5" color='primary' sx={{ mb: 2 }}>Alteração de senha</Typography>
+                {alertaSenha && <Alert severity={tipoAlerta} sx={{ mb: 2 }}>{alertaSenha}</Alert>}
 
                 <ConfigSetting title="Senha anterior">
-                    <TextField label="Informe sua senha anterior" variant="filled" fullWidth type="password" />
+                    <TextField label="Informe sua senha anterior" variant="filled" fullWidth type="password" 
+                    value = {senhaAnterior} onChange= {(e) =>  setSenhaAnterior(e.target.value)} />
                 </ConfigSetting>
 
                 <ConfigSetting title="Nova senha">
-                    <TextField label="Informe sua nova senha" variant="filled" fullWidth type="password" />
+                    <TextField label="Informe sua nova senha" variant="filled" fullWidth type="password"
+                    value = {novaSenha} onChange= {(e) =>  setNovaSenha(e.target.value)} />
                 </ConfigSetting>
 
                 <ConfigSetting title="Confirmação de senha">
-                    <TextField label="Confirme sua nova senha" variant="filled" fullWidth type="password" />
+                    <TextField label="Confirme sua nova senha" variant="filled" fullWidth type="password"
+                    value = {confirmaSenha} onChange= {(e) =>  setConfirmaSenha(e.target.value)} />
                 </ConfigSetting>
 
                 <ConfigSetting>
-                    <Button variant="outlined" color="primary" onClick={handleCoverRemove}>
+                    <Button variant="outlined" color="primary" onClick={handleChangePassword}>
                         Alterar
                     </Button>
                 </ConfigSetting>
