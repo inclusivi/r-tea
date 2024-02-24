@@ -219,7 +219,7 @@ export default function UserConfigPage() {
     const handleClickShowPassword = () => {
       setShowPassword(!showPassword);
     };
-  
+
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
     };
