@@ -204,7 +204,12 @@ export const LoginForm = () => {
  * CSS do olhinho
  * .olhinho{}
  * 
- *  algo tipo  
+ * imgem olhinho aberto
+https://commons.wikimedia.org/wiki/File:Eye_-_The_Noun_Project.svg?uselang=pt-br#/media/File:Eye_-_The_Noun_Project.svg
+ 
+contrato do olhinho abertohttps://en.wikipedia.org/wiki/pt:Creative_Commons
+
+*  algo tipo  
  * no click do olhinho 
  * se campodesenha.type = password
  * campodesenha.type  ==text
