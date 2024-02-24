@@ -384,6 +384,7 @@ export default function UserConfigPage() {
                 </ConfigSetting>
 
                 <ConfigSetting title="Confirmação de senha">
+/*Eduardo mexua aqui*/
                     <TextField label="Confirme sua nova senha" variant="filled" fullWidth type="password"
                     value = {confirmaSenha} onChange= {(e) =>  setConfirmaSenha(e.target.value)}
                     InputProps={{
@@ -405,6 +406,9 @@ export default function UserConfigPage() {
                     <Button variant="outlined" color="primary" onClick={handleChangePassword}>
                         Alterar
                     </Button>
+
+
+
                 </ConfigSetting>
 
 
@@ -412,3 +416,17 @@ export default function UserConfigPage() {
         </>
     );
 }
+/*https://mui.com/material-ui/react-text-field/
+//https://ant.design/docs/spec/buttons#-text-button
+/*
+<Button variant="outlined" color="primary" onClick={handleChangePassword}>
+/*olho aberto*//*
+<EyeOutlined /> 
+olho fechado
+<EyeInvisibleOutlined />
+
+</Button>*//*
+
+
+
+*/
