@@ -3,7 +3,7 @@
 import { useAuthContext } from "@/components/auth/AuthContext";
 import { DefaultLoader } from "@/components/loading/DefaultLoader";
 import ImageDropper from "@/components/shared/widgets/imageDropper/ImageDropper";
-import { Alert, AlertColor, Avatar, Box, Button, Card, Divider, MenuItem, Modal, TextField, Typography } from "@mui/material";
+import { Alert, AlertColor, Avatar, Box, Button, Card, Divider, IconButton, InputAdornment, MenuItem, Modal, TextField, Typography, inputAdornmentClasses } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import React, { useEffect } from "react";
 import { ChangeEvent } from "react";
@@ -14,6 +14,8 @@ import { Municipio, UF } from "@/modules/ibge/types";
 import { getCidades, getUFs } from "@/modules/ibge/localidades";
 import LoadingModal from "@/components/loading/LoadingModal";
 import { changePassword } from "@/modules/firebase/services/auth";
+import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
+
 
 interface ConfigSectionProps {
     title?: string;
@@ -40,6 +42,7 @@ function ConfigSection(props: ConfigSectionProps) {
 
 function ConfigSetting(props: ConfigSectionProps) {
     const { title, subtitle, children } = props;
+    
     return (
         <Grid container spacing={2} sx={{ mb: 2 }}>
             <Grid xs={12} lg={3} sx={{ pt: 1 }}>
@@ -211,6 +214,15 @@ export default function UserConfigPage() {
             setLoading(false);
         }
     }
+
+    const [showPassword, setShowPassword] = React.useState(false);
+    const handleClickShowPassword = () => {
+      setShowPassword(!showPassword);
+    };
+  
+    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+    };
                 
     return (user &&
         <>
@@ -336,17 +348,57 @@ export default function UserConfigPage() {
 
                 <ConfigSetting title="Senha anterior">
                     <TextField label="Informe sua senha anterior" variant="filled" fullWidth type="password" 
-                    value = {senhaAnterior} onChange= {(e) =>  setSenhaAnterior(e.target.value)} />
+                    value = {senhaAnterior} onChange= {(e) =>  setSenhaAnterior(e.target.value)} 
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end">
+                            <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                          size="large"
+                        >
+                            {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                        </IconButton>
+                        </InputAdornment>
+                        }} />
                 </ConfigSetting>
 
                 <ConfigSetting title="Nova senha">
                     <TextField label="Informe sua nova senha" variant="filled" fullWidth type="password"
-                    value = {novaSenha} onChange= {(e) =>  setNovaSenha(e.target.value)} />
+                    value = {novaSenha} onChange= {(e) =>  setNovaSenha(e.target.value)}
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end">
+                            <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                          size="large"
+                        >
+                            {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                        </IconButton>
+                        </InputAdornment>
+                        }}
+                     />
                 </ConfigSetting>
 
                 <ConfigSetting title="Confirmação de senha">
                     <TextField label="Confirme sua nova senha" variant="filled" fullWidth type="password"
-                    value = {confirmaSenha} onChange= {(e) =>  setConfirmaSenha(e.target.value)} />
+                    value = {confirmaSenha} onChange= {(e) =>  setConfirmaSenha(e.target.value)}
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end">
+                            <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                          size="large"
+                        >
+                            {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                        </IconButton>
+                        </InputAdornment>
+                        }} />
                 </ConfigSetting>
 
                 <ConfigSetting>
