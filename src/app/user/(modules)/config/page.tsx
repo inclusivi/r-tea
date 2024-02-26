@@ -216,16 +216,30 @@ export default function UserConfigPage() {
     }
 
     // código de senha que eu peguei de components/auth/LoginForm.tsx
-    const [showPassword, setShowPassword] = React.useState(false);
-    const handleClickShowPassword = () => {
-      setShowPassword(!showPassword);
-    };
+    const [showPasswordSenhaAnterior, setShowPasswordSenhaAnterior] = React.useState(false);
+    const [showPasswordNovaSenha, setShowPasswordNovaSenha] = React.useState(false);
+    const [showPasswordConfirmarSenha, setShowPasswordConfirmarSenha] = React.useState(false);
+
   
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
     };
     // fim do código de senha que eu peguei de components/auth/LoginForm.tsx
+    
+    
+    
+function showPassword(mostrou: boolean) {
+    if (mostrou==true) {
+        return "text"
+    } else {
+        return "password"
+    }
+}
 
+/*
+referencia
+Aplicacoes web real time com Node-js  Casa do Codigo
+*/
                 
     return (user &&
         <>
@@ -350,36 +364,36 @@ export default function UserConfigPage() {
                 {alertaSenha && <Alert severity={tipoAlerta} sx={{ mb: 2 }}>{alertaSenha}</Alert>}
                 {/* Cada um dos campos contêm InputProps que adicionam o botão de olhinho no lado direito dos forms */}
                 <ConfigSetting title="Senha anterior">
-                    <TextField label="Informe sua senha anterior" variant="filled" fullWidth type="password" 
+                    <TextField label="Informe sua senha anterior" variant="filled" fullWidth type={showPassword(showPasswordSenhaAnterior)} 
                     value = {senhaAnterior} onChange= {(e) =>  setSenhaAnterior(e.target.value)} 
                     InputProps={{
                         endAdornment: <InputAdornment position="end">
                             <IconButton
                           aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
+                          onClick={() => setShowPasswordSenhaAnterior(!showPasswordSenhaAnterior)}
                           onMouseDown={handleMouseDownPassword}
                           edge="end"
                           size="large"
                         >
-                            {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                            {showPasswordSenhaAnterior ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                         </IconButton>
                         </InputAdornment>
                         }} />
                 </ConfigSetting>
 
                 <ConfigSetting title="Nova senha">
-                    <TextField label="Informe sua nova senha" variant="filled" fullWidth type="password"
+                    <TextField label="Informe sua nova senha" variant="filled" fullWidth type={showPassword(showPasswordNovaSenha)} 
                     value = {novaSenha} onChange= {(e) =>  setNovaSenha(e.target.value)}
                     InputProps={{
                         endAdornment: <InputAdornment position="end">
                             <IconButton
                           aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
+                          onClick={() => setShowPasswordNovaSenha(!showPasswordNovaSenha)}
                           onMouseDown={handleMouseDownPassword}
                           edge="end"
                           size="large"
                         >
-                            {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                            {showPasswordNovaSenha ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                         </IconButton>
                         </InputAdornment>
                         }}
@@ -387,52 +401,18 @@ export default function UserConfigPage() {
                 </ConfigSetting>
 
                 <ConfigSetting title="Confirmação de senha">
-                    <TextField label="Confirme sua nova senha" variant="filled" fullWidth type="password"
+                    <TextField label="Confirme sua nova senha" variant="filled" fullWidth type={showPassword(showPasswordConfirmarSenha)} 
                     value = {confirmaSenha} onChange= {(e) =>  setConfirmaSenha(e.target.value)}
                     InputProps={{
                         endAdornment: <InputAdornment position="end">
                             <IconButton
                           aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
+                          onClick={() => setShowPasswordConfirmarSenha(!showPasswordConfirmarSenha)}
                           onMouseDown={handleMouseDownPassword}
                           edge="end"
                           size="large"
                         >{/* tá dando o alerta aqui porquê imagem não encontrada, Eduardo achou alerta no código que vc   Roger mexeu,eu sou Eduardo*/}
-                            {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
-                            {/*
-                            
-    function showPassword1(mostrou,senhacampo) {
-     if (mostrou==true) {
-         senhacampo.type='text'
-         return true
-     } else {
-         senhacampo.type='password'
-         return false
-     }
-} 
-function showPassword2(mostrou,senhacampo) {
-     if (mostrou==true) {
-         senhacampo.type='text'
-         return true
-     } else {
-         senhacampo.type='password'
-         return false
-     }
-}
-function showPassword3(mostrou,senhacampo) {
-     if (mostrou==true) {
-         senhacampo.type='text'
-         return true
-     } else {
-         senhacampo.type='password'
-         return false
-     }
-}
-referencia
- Aplicacoes web real time com Node-js  Casa do Codigo
-*/
-
-}
+                            {showPasswordConfirmarSenha ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                         </IconButton>
                         </InputAdornment>
                         }} />
