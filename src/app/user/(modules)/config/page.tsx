@@ -399,6 +399,40 @@ export default function UserConfigPage() {
                           size="large"
                         >{/* tá dando o alerta aqui porquê imagem não encontrada, Eduardo achou alerta no código que vc   Roger mexeu,eu sou Eduardo*/}
                             {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                            {/*
+                            
+    function showPassword1(mostrou,senhacampo) {
+     if (mostrou==true) {
+         senhacampo.type='text'
+         return true
+     } else {
+         senhacampo.type='password'
+         return false
+     }
+} 
+function showPassword2(mostrou,senhacampo) {
+     if (mostrou==true) {
+         senhacampo.type='text'
+         return true
+     } else {
+         senhacampo.type='password'
+         return false
+     }
+}
+function showPassword3(mostrou,senhacampo) {
+     if (mostrou==true) {
+         senhacampo.type='text'
+         return true
+     } else {
+         senhacampo.type='password'
+         return false
+     }
+}
+referencia
+ Aplicacoes web real time com Node-js  Casa do Codigo
+*/
+
+}
                         </IconButton>
                         </InputAdornment>
                         }} />
