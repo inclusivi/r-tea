@@ -394,7 +394,7 @@ export default function UserConfigPage() {
                           onMouseDown={handleMouseDownPassword}
                           edge="end"
                           size="large"
-                        >
+                        >{/* tá dando o alerta aqui porquê imagem não encontrada, Eduardo achou alerta no código que vc   Roger mexeu,eu sou Eduardo*/}
                             {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                         </IconButton>
                         </InputAdornment>
