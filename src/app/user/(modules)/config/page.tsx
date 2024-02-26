@@ -15,7 +15,7 @@ import { getCidades, getUFs } from "@/modules/ibge/localidades";
 import LoadingModal from "@/components/loading/LoadingModal";
 import { changePassword } from "@/modules/firebase/services/auth";
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
-
+//       ^ código que importa o olhinho do Ant Design, também copiado de components/auth/LoginForm.tsx
 
 interface ConfigSectionProps {
     title?: string;
@@ -215,6 +215,7 @@ export default function UserConfigPage() {
         }
     }
 
+    // código de senha que eu peguei de components/auth/LoginForm.tsx
     const [showPassword, setShowPassword] = React.useState(false);
     const handleClickShowPassword = () => {
       setShowPassword(!showPassword);
@@ -223,6 +224,8 @@ export default function UserConfigPage() {
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
     };
+    // fim do código de senha que eu peguei de components/auth/LoginForm.tsx
+
                 
     return (user &&
         <>
@@ -345,7 +348,7 @@ export default function UserConfigPage() {
             <ConfigSection title="Segurança" subtitle="Alteração de senha e autenticação de dois fatores">
                 <Typography variant="h5" color='primary' sx={{ mb: 2 }}>Alteração de senha</Typography>
                 {alertaSenha && <Alert severity={tipoAlerta} sx={{ mb: 2 }}>{alertaSenha}</Alert>}
-
+                {/* Cada um dos campos contêm InputProps que adicionam o botão de olhinho no lado direito dos forms */}
                 <ConfigSetting title="Senha anterior">
                     <TextField label="Informe sua senha anterior" variant="filled" fullWidth type="password" 
                     value = {senhaAnterior} onChange= {(e) =>  setSenhaAnterior(e.target.value)} 
