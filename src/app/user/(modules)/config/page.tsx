@@ -205,7 +205,7 @@ export default function UserConfigPage() {
                 setTipoAlerta('error');
             }
         } catch (error) {
-            setAlertaSenha('Oops! Não foi possível alterar sua senha. Lembre-se de que sua senha deve conter no mínimo seis caracteres!');
+            setAlertaSenha('Oops! Não foi possível alterar sua senha: ' + error);
             setTipoAlerta('error');
         } finally {
             setLoading(false);
