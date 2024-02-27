@@ -15,6 +15,7 @@ export async function login(email: string, password: string) {
         trataErro(error, "Erro ao fazer login");
     }
 }
+
 function trataErro(error: any, mensagem: string): never {
     let errorCode = 'unknown';
     if (error instanceof FirebaseError) {
@@ -24,6 +25,7 @@ function trataErro(error: any, mensagem: string): never {
     }
     throw new Error(mensagem + ": " + trataMensagemDeErro(errorCode));
 }
+
 function trataMensagemDeErro(errorCode: string): string {
     switch (errorCode) {
         case "auth/invalid-login-credentials":
@@ -40,18 +42,15 @@ function trataMensagemDeErro(errorCode: string): string {
             return "Este e-mail já está sendo utilizado";
         //espaço pra colocar mais erros acima
         default:
-            return "Erro desconhecido: " + errorCode;
+            return `Erro desconhecido (${errorCode})`;
     }
 }
-
-
-
 
 export async function logout() {
     try {
         return await auth.signOut();
     } catch (error) {
-        trataErro(error, "Erro ao fazer logout: ");
+        trataErro(error, "Erro ao fazer logout");
     }
 }
 export async function register(email: string, password: string, firstName: string, lastName: string): Promise<void> {
@@ -101,11 +100,10 @@ export async function changePassword(user: User, oldPassword: string, newPasswor
         const credential = await reauthenticateWithCredential(firebaseUser!, oldCredentials);
         await updatePassword(credential.user, newPassword);
     } catch (error) {
-        trataErro(error, "");
+        trataErro(error, "Erro ao alterar senha");
     }
 }
 
 export async function sendPasswordChangeEmail(email: string) {
     await sendPasswordResetEmail(auth, email);
 }
-

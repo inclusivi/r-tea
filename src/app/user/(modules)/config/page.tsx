@@ -205,7 +205,11 @@ export default function UserConfigPage() {
                 setTipoAlerta('error');
             }
         } catch (error) {
-            setAlertaSenha('Oops! Não foi possível alterar sua senha: ' + error);
+            let mensagem = String(error);
+            if (error instanceof Error) {
+                mensagem = error.message;
+            } 
+            setAlertaSenha('Oops! Não foi possível alterar sua senha: ' + mensagem);
             setTipoAlerta('error');
         } finally {
             setLoading(false);
