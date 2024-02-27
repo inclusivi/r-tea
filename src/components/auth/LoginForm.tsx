@@ -185,31 +185,4 @@ export const LoginForm = () => {
     </>
   );
 };
-{
-/*referencias do projeto
- * pt.stackoverflow.com/questions/102024/input-type-password-com-o-olho-de-mostrar-senha
- *emojiterra.com/pt/olho/
- * 
- * fontawesome.com
- * 
- * requer importar  biblioteca de fontawesome.com   
- * 👁️<button id='olhinho' class="olhinhodasenha" id="olhinhodasenha1" type='button' >
- * <!--icone de  olho  pra mostrar senha-->
- * <FontAwesomeIcon icon="fa-regular fa-eye" />
- * 
- * <!--icone de  olho  pra mostrar senha-->
- * <FontAwesomeIcon icon="fa-regular fa-eye-slash" />
- * </button>
- * 
- * CSS do olhinho
- * .olhinho{}
- * 
- *  algo tipo  
- * no click do olhinho 
- * se campodesenha.type = password
- * campodesenha.type  ==text
- * senão 
- * campodesenha.type  == password
- * 
- */
-} 
+

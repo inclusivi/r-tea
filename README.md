@@ -57,4 +57,3 @@ Este projeto é licenciado sob a [Licença MIT](LICENSE).
 ---
 
 Esperamos que o R-TEA seja útil para muitas pessoas e contribua para o bem-estar de crianças autistas. Se você tiver alguma dúvida ou sugestão, sinta-se à vontade para abrir uma [issue](https://github.com/felipe-louzas/univesp-pi-rtea-frontend/issues)!
-requer Node version v20.11.0
