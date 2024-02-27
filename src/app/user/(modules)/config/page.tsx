@@ -210,6 +210,11 @@ export default function UserConfigPage() {
         } finally {
             setLoading(false);
         }
+
+        if (senhaAnterior === '' || novaSenha === '' || confirmaSenha === '') {
+            setAlertaSenha('Por favor, preencha todos os campos!');
+            setTipoAlerta('error');
+        }
     }
                 
     return (user &&
