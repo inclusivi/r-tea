@@ -73,8 +73,17 @@ export default function UserMenu() {
                             <ListItemButton onClick={() => handleNav('/user/perfil')}>
                                 <ListItemIcon><PersonIcon /></ListItemIcon>
                                 <ListItemText primary='Perfil' />
-                            </ListItemButton>
+                            </ListItemButton>                   {/*Use  se usuarioCtx.permitidoCriarPessoa*= true verdaeio ?  "/user/invites" senão '/user/convites' */}                                            {]}
                             <ListItemButton onClick={() => handleNav(userCtx.allowCreatePessoa ? '/user/invites' : '/user/convites')}>
+                                                                    {/* '/caminho/arquivo.tsx' 
+                                                                    
+                                                                    
+                                                                   function name(params:type) {
+                                                                    
+                                                                   }
+                                                                   */  
+                                                                   
+                                                                    }
                                 <ListItemIcon><MailIcon /></ListItemIcon>
                                 <ListItemText primary='Convites' />
                             </ListItemButton>

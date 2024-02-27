@@ -29,8 +29,9 @@ export class UserContext implements IUserContext {
         }
     }
 
-    get allowCreatePessoa(): boolean {
-        return this._userKind === UserKind.Admin || this._userKind === UserKind.Responsavel;
+    get allowCreatePessoa(): boolean {      /*se usuariotipo = Admin ou usuariotipo = Responsavel ou usuariotipo=autista ou usuariotipo=jornadadedescoberta  */                  
+        return this._userKind === UserKind.Admin || this._userKind === UserKind.Responsavel || this._userKind === UserKind.PessoaAutista || this._userKind === UserKind.PessoaSemDiagnostico;
+        /*a pessoa em jornada de descoberdo e pessoa autista   */
     }
 }
 
