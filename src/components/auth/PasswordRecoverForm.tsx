@@ -6,7 +6,7 @@ import React from "react";
 import * as Yup from 'yup';
 import { Formik, FormikBag, FormikValues } from "formik";
 import { sendPasswordChangeEmail } from "@/modules/firebase/services/auth";
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 export const PasswordRecoverForm = () => {
     const router = useRouter();
