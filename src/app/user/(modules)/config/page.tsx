@@ -193,7 +193,10 @@ export default function UserConfigPage() {
         setLoading(true);
         setAlertaSenha('');
         try {
-            if (novaSenha === confirmaSenha) {
+            if (senhaAnterior === '' || novaSenha === '' || confirmaSenha === '') {
+                setAlertaSenha('Não se esqueça de preencher todos os campos!');
+                setTipoAlerta('error');
+            } else if (novaSenha === confirmaSenha) {
                 await changePassword(user!, senhaAnterior, novaSenha);
                 setAlertaSenha('Sua senha foi alterada com sucesso!');
                 setTipoAlerta('success');
@@ -201,7 +204,7 @@ export default function UserConfigPage() {
                 setNovaSenha('');
                 setConfirmaSenha('');
             } else {
-                setAlertaSenha('As novas senhas informadas devem ser iguais!');
+                setAlertaSenha('Verifique se a confirmação de sua nova senha está correta!');
                 setTipoAlerta('error');
             }
         } catch (error) {
@@ -209,11 +212,6 @@ export default function UserConfigPage() {
             setTipoAlerta('error');
         } finally {
             setLoading(false);
-        }
-
-        if (senhaAnterior === '' || novaSenha === '' || confirmaSenha === '') {
-            setAlertaSenha('Por favor, preencha todos os campos!');
-            setTipoAlerta('error');
         }
     }
                 
