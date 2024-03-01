@@ -15,7 +15,7 @@ export const AllUserKinds = [
   { value: UserKind.ProfissionalSaude, label: "Profissional de Saúde" },
   { value: UserKind.Cuidador, label: "Cuidador" },
   { value: UserKind.Educador, label: "Educador" },
-  { value: UserKind.PessoaAutista, label: "Pessoa com Autismo" },
+  { value: UserKind.PessoaAutista, label: "Pessoa com Autismo" },/*jornada de descoberta antes era pessoa sem diagnostico*/
   { value: UserKind.PessoaSemDiagnostico, label: "Jornada de Descoberta" },
 ];
 
@@ -31,7 +31,11 @@ export const UserKindDescriptions = {
 };
 
 // Protótipo do método map para criar array da propriedade label.
-
-// export const UserRotulo = AllUserKinds.map((item) => {
-//   return item.label;
-// });
+ 
+ export const UserRotulo = AllUserKinds.map((item) => {
+//model de txto que exibe o valor ponto ebinido + AllUserKinds.label
+  let listadoperfil=`exibindo: ${item.label}`
+   return listadoperfil;
+ 
+ 
+  });
