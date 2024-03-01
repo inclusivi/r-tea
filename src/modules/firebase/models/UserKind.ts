@@ -10,28 +10,22 @@ export enum UserKind {
 }
 
 export const AllUserKinds = [
-  { value: UserKind.Admin, label: "Administrador" },
-  { value: UserKind.Responsavel, label: "Responsável" },
-  { value: UserKind.ProfissionalSaude, label: "Profissional de Saúde" },
-  { value: UserKind.Cuidador, label: "Cuidador" },
-  { value: UserKind.Educador, label: "Educador" },
-  { value: UserKind.PessoaAutista, label: "Pessoa com Autismo" },
-  { value: UserKind.PessoaSemDiagnostico, label: "Jornada de Descoberta" },
+  { value: UserKind.Admin, label: 'Administrador' },
+  { value: UserKind.Responsavel, label: 'Responsável' },
+  { value: UserKind.ProfissionalSaude, label: 'Profissional de Saúde' },
+  { value: UserKind.Cuidador, label: 'Cuidador' },
+  { value: UserKind.Educador, label: 'Educador' },
+  { value: UserKind.PessoaAutista, label: 'Pessoa com Autismo' },
+  { value: UserKind.PessoaSemDiagnostico, label: 'Jornada de Descoberta' },
 ];
 
 export const UserKindDescriptions = {
-  [UserKind.Guest]: "Convidado",
-  [UserKind.Admin]: "Administrador",
-  [UserKind.Responsavel]: "Responsável",
-  [UserKind.ProfissionalSaude]: "Profissional de Saúde",
-  [UserKind.Cuidador]: "Cuidador",
-  [UserKind.Educador]: "Educador",
-  [UserKind.PessoaAutista]: "Pessoa com Autismo",
-  [UserKind.PessoaSemDiagnostico]: "Jornada de Descoberta",
+  [UserKind.Guest]: 'Convidado',
+  [UserKind.Admin]: 'Administrador',
+  [UserKind.Responsavel]: 'Responsável',
+  [UserKind.ProfissionalSaude]: 'Profissional de Saúde',
+  [UserKind.Cuidador]: 'Cuidador',
+  [UserKind.Educador]: 'Educador',
+  [UserKind.PessoaAutista]: 'Pessoa com Autismo',
+  [UserKind.PessoaSemDiagnostico]: 'Jornada de Descoberta',
 };
-
-// Protótipo do método map para criar array da propriedade label.
-
-// export const UserRotulo = AllUserKinds.map((item) => {
-//   return item.label;
-// });
