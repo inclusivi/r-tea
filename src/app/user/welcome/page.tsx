@@ -7,10 +7,9 @@ import therapist from '@/assets/images/icons/therapist.png';
 import autistic from '@/assets/images/icons/autisticPerson2.png';
 import personInDiscover from '@/assets/images/icons/personInDiscover.png';
 
-
 import { useState } from "react";
-import { Card, CardContent, CardMedia, Grid, Typography, Divider, Button, Box, Modal } from "@mui/material";
-import { UserKind } from "@/modules/firebase/models/UserKind";
+import { Card, CardContent, Grid, Typography, Divider, Button, Box, Modal } from "@mui/material";
+import { UserKind, UserKindDescriptions } from "@/modules/firebase/models/UserKind";
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import Image from 'next/image';
 import { DefaultLoader } from '@/components/loading/DefaultLoader';
@@ -18,14 +17,13 @@ import { getProfileRepository } from '@/modules/firebase';
 import { useRouter } from 'next/navigation';
 import { useAuthContext } from '@/components/auth/AuthContext';
 
-
 function ChoiceCard({ title, description, image, value, selected, onClick }: {
-    title: string,
-    description: string,
-    image: string | StaticImport,
-    value: UserKind,
-    selected: UserKind | null,
-    onClick: (userKind: UserKind) => void
+    title: string;
+    description: string;
+    image: string | StaticImport;
+    value: UserKind;
+    selected: UserKind | null;
+    onClick: (userKind: UserKind) => void;
 }) {
     const cardBgColor = value === selected ? 'secondary.main' : 'background.paper';
 
@@ -37,13 +35,13 @@ function ChoiceCard({ title, description, image, value, selected, onClick }: {
                     flexDirection: 'column',
                     height: '100%',
                     bgcolor: cardBgColor,
-                    cursor: 'pointer'
+                    cursor: 'pointer',
                 }}
                 onClick={() => onClick(value)}
             >
                 <CardContent sx={{ flexGrow: 1 }}>
                     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                        <Image src={image} alt={title} width={128} />
+                    <Image src={image} alt={title} width={128} />
                     </Box>
                     <Typography gutterBottom variant="h4" component="h2" sx={{ mt: 2 }}>
                         {title}
@@ -57,10 +55,6 @@ function ChoiceCard({ title, description, image, value, selected, onClick }: {
     );
 }
 
-
-
-
-
 export default function WelcomePage() {
     const router = useRouter();
     const { user, reloadUser } = useAuthContext();
@@ -70,7 +64,7 @@ export default function WelcomePage() {
 
     const handleUserKindClick = (userKind: UserKind) => {
         setSelectedUserKind(userKind);
-    }
+    };
 
     const handleSaveClick = async () => {
         if (selectedUserKind === null) {
@@ -86,7 +80,7 @@ export default function WelcomePage() {
         } finally {
             setLoading(false);
         }
-    }
+    };
 
     return (
         <>
@@ -99,48 +93,48 @@ export default function WelcomePage() {
 
             <Grid container spacing={2}>
                 <ChoiceCard
-                    title="Responsável"
-                    description="Parente ou guardião legal da pessoa autista. Permite cadastrar dependentes e gerenciar o compartilhamento de informações com os demais usuários."
+                    title={UserKindDescriptions[UserKind.Responsavel]}
+                    description='Parente ou guardião legal da pessoa autista. Permite cadastrar dependentes e gerenciar o compartilhamento de informações com os demais usuários.'
                     value={UserKind.Responsavel}
                     selected={selectedUserKind}
                     onClick={handleUserKindClick}
                     image={parents}
                 />
                 <ChoiceCard
-                    title="Profissional de Saúde"
-                    description="Médicos, terapeutas, psicólogos e outros especialistas envolvidos no cuidado e no tratamento da pessoa autista. Permite adicionar e visualizar os registros dos pacientes, visualizar relatórios especializados e priorizar opções de registros de acordo com plano terapeurico."
+                    title={UserKindDescriptions[UserKind.ProfissionalSaude]}
+                    description='Médicos, terapeutas, psicólogos e outros especialistas envolvidos no cuidado e no tratamento da pessoa autista. Permite adicionar e visualizar os registros dos pacientes, visualizar relatórios especializados e priorizar opções de registros de acordo com plano terapeurico.'
                     value={UserKind.ProfissionalSaude}
                     selected={selectedUserKind}
                     onClick={handleUserKindClick}
                     image={therapist}
                 />
                 <ChoiceCard
-                    title="Educador"
-                    description="Professores e especialistas em educação especial, com permissão para registrar observações relacionadas ao comportamento e desempenho acadêmico de alunos autistas."
+                    title={UserKindDescriptions[UserKind.Educador]}
+                    description='Professores e especialistas em educação especial, com permissão para registrar observações relacionadas ao comportamento e desempenho acadêmico de alunos autistas.'
                     value={UserKind.Educador}
                     selected={selectedUserKind}
                     onClick={handleUserKindClick}
                     image={teacher}
                 />
                 <ChoiceCard
-                    title="Cuidador"
-                    description="Indivíduos que prestam assistência direta e suporte diário a pessoas autistas. Permite adicionar registros no histórico da pessoa autista."
+                    title={UserKindDescriptions[UserKind.Cuidador]}
+                    description='Indivíduos que prestam assistência direta e suporte diário a pessoas autistas. Permite adicionar registros no histórico da pessoa autista.'
                     value={UserKind.Cuidador}
                     selected={selectedUserKind}
                     onClick={handleUserKindClick}
                     image={babysitter}
                 />
                 <ChoiceCard
-                    title="Pessoa Autista"
-                    description="Autistas adultos. Permite adicionar e acompanhar os próprios registros e informações, além de gerenciar o compartilhamento do perfil com outros usuários."
+                    title={UserKindDescriptions[UserKind.PessoaAutista]}
+                    description='Autistas adultos. Permite adicionar e acompanhar os próprios registros e informações, além de gerenciar o compartilhamento do perfil com outros usuários.'
                     value={UserKind.PessoaAutista}
                     selected={selectedUserKind}
                     onClick={handleUserKindClick}
                     image={autistic}
                 />
                 <ChoiceCard
-                    title="Jornada de Descoberta"
-                    description="Aquelas pessoas que ainda estão em sua jornada de descoberta e querem experimentar a plataforma, mas ainda não têm um diagnóstico definido. Dá acesso as mesmas funções que a pessoa autista."
+                    title={UserKindDescriptions[UserKind.PessoaSemDiagnostico]}
+                    description='Aquelas pessoas que ainda estão em sua jornada de descoberta e querem experimentar a plataforma, mas ainda não têm um diagnóstico definido. Dá acesso as mesmas funções que a pessoa autista.'
                     value={UserKind.PessoaSemDiagnostico}
                     selected={selectedUserKind}
                     onClick={handleUserKindClick}
