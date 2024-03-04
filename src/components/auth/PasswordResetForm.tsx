@@ -10,6 +10,7 @@ import { Formik } from 'formik';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 
 import { strengthColor, strengthIndicator } from '@/modules/utils/passwordStrength';
+import { resetPassword } from '@/modules/firebase/services/auth';
 
 
 type PasswordStrength = {
@@ -17,7 +18,12 @@ type PasswordStrength = {
     color: string
 }
 
-const PasswordResetForm = () => {
+interface PasswordResetFormProps {
+  oobCode: string;
+}
+
+const PasswordResetForm: React.FC<PasswordResetFormProps> = ({ oobCode }) => {
+
   const [level, setLevel] = React.useState<PasswordStrength>();
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmationPassword, setShowConfirmationPassword] = React.useState(false);
@@ -67,11 +73,11 @@ const PasswordResetForm = () => {
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
             setStatus({ success: false });
-            
+            await resetPassword(oobCode, values.password)
             setSubmitting(false);
-          } catch (err) {
+          } catch (err: any) {
             setStatus({ success: false });
-            setErrors({ submit: String(err) });
+            setErrors({ submit: String(err.message) });
             setSubmitting(false);
           }
         }}

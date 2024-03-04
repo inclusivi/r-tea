@@ -1,18 +1,23 @@
 'use client'
 
 import React from 'react'
+import { useSearchParams } from 'next/navigation'
 import { Grid, Stack, Typography } from "@mui/material"
+
 import PasswordResetForm from '@/components/auth/PasswordResetForm'
 
 
-const page = () => {
+const RecoverPage = () => {
   const [isEmailCodeValid, setIsEmailCodeValid] = React.useState<Boolean>(true);
 
-  return (
+  const searchParams = useSearchParams();
 
+  const oobCode = searchParams.get('oobCode');
+
+  return (
     <>
 
-    // renderizar condicionalmente depedendo do resultado da validação
+    {/*  renderizar condicionalmente depedendo do resultado da validação */}
     {isEmailCodeValid && 
       <Grid container spacing={3}>
         <Grid item xs={12}>
@@ -21,11 +26,11 @@ const page = () => {
             </Stack>
         </Grid>
         <Grid item xs={12}>
-            <PasswordResetForm />
+            <PasswordResetForm oobCode={oobCode!}/>
         </Grid>
       </Grid>}
     </>
   )
 }
 
-export default page
+export default RecoverPage
