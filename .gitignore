@@ -41,6 +41,7 @@ nbproject
 vscode
 #Visual Studio
 /.vs
+
 *.ods
 desktop.ini
 DS_Store
