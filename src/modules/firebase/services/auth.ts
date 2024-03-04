@@ -41,6 +41,10 @@ function trataMensagemDeErro(errorCode: string): string {
         case "auth/email-already-in-use":
             return "Este e-mail já está sendo utilizado";
         //espaço pra colocar mais erros acima
+        case "auth/expired-action-code":
+            return "Código de verificação expirado";
+        case "auth/invalid-action-code":
+            return "Código de verificação inválido";
         default:
             return `Erro desconhecido (${errorCode})`;
     }
