@@ -35,10 +35,12 @@ export default function UserMenu() {
             router.push(route);
         }
     }
-
-    const handleLogout = async () => {
+/*bug não tá deslgoando*/
+                        /*async*/
+    const handleLogout =  () => {
         setUserMenuOpen(false);
-        await logout();
+        /*await*/ logout();
+
     };
 
     return (
