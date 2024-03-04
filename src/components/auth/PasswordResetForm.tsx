@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import { Button, FormHelperText, Grid, InputLabel, OutlinedInput, Stack, Box, Typography, InputAdornment, IconButton } from "@mui/material"
+import { Button, FormHelperText, Grid, InputLabel, OutlinedInput, Stack, Box, Typography, InputAdornment, IconButton, Alert } from "@mui/material"
 import { AnimateButton } from "../shared/elements/AnimatedButton"
 
 import * as Yup from 'yup';
@@ -72,9 +72,9 @@ const PasswordResetForm: React.FC<PasswordResetFormProps> = ({ oobCode }) => {
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
-            setStatus({ success: false });
             await resetPassword(oobCode, values.password)
             setSubmitting(false);
+            setStatus({ success: true });
           } catch (err: any) {
             setStatus({ success: false });
             setErrors({ submit: String(err.message) });
@@ -82,7 +82,7 @@ const PasswordResetForm: React.FC<PasswordResetFormProps> = ({ oobCode }) => {
           }
         }}
       >
-        {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
+        {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values, status }) => (
            <form noValidate onSubmit={handleSubmit}>
            <Grid container spacing={3}>
              <Grid item xs={12}>
@@ -177,7 +177,11 @@ const PasswordResetForm: React.FC<PasswordResetFormProps> = ({ oobCode }) => {
                     <FormHelperText error>{errors.submit}</FormHelperText>
                 </Grid>
               )}
-   
+              {status && status.success && (
+                <Grid item xs={12}>
+                  <Alert severity="success" variant='outlined'>Senha redefinida com sucesso.</Alert>
+                </Grid>
+              )}
              <Grid item xs={12}>
                <Stack spacing={2}>
                  <AnimateButton >
