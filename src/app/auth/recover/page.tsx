@@ -18,7 +18,7 @@ const RecoverPage = () => {
     <>
 
     {/*  renderizar condicionalmente depedendo do resultado da validação */}
-    {isEmailCodeValid && 
+    {isEmailCodeValid && oobCode && (
       <Grid container spacing={3}>
         <Grid item xs={12}>
             <Stack sx={{ mb: { xs: -0.5, sm: 0.5 } }}>
@@ -26,9 +26,9 @@ const RecoverPage = () => {
             </Stack>
         </Grid>
         <Grid item xs={12}>
-            <PasswordResetForm oobCode={oobCode!}/>
+            <PasswordResetForm oobCode={oobCode}/>
         </Grid>
-      </Grid>}
+      </Grid>)}
     </>
   )
 }
