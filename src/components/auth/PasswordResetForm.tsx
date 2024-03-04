@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import { Button, FormHelperText, Grid, InputLabel, OutlinedInput, Stack, Box, Typography, InputAdornment, IconButton } from "@mui/material"
+import { Button, FormHelperText, Grid, InputLabel, OutlinedInput, Stack, Box, Typography, InputAdornment, IconButton, Alert } from "@mui/material"
 import { AnimateButton } from "../shared/elements/AnimatedButton"
 
 import * as Yup from 'yup';
@@ -10,6 +10,7 @@ import { Formik } from 'formik';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 
 import { strengthColor, strengthIndicator } from '@/modules/utils/passwordStrength';
+import { resetPassword } from '@/modules/firebase/services/auth';
 
 
 type PasswordStrength = {
@@ -17,7 +18,12 @@ type PasswordStrength = {
     color: string
 }
 
-const PasswordResetForm = () => {
+interface PasswordResetFormProps {
+  oobCode: string;
+}
+
+const PasswordResetForm: React.FC<PasswordResetFormProps> = ({ oobCode }) => {
+
   const [level, setLevel] = React.useState<PasswordStrength>();
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmationPassword, setShowConfirmationPassword] = React.useState(false);
@@ -66,17 +72,17 @@ const PasswordResetForm = () => {
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
-            setStatus({ success: false });
-            
+            await resetPassword(oobCode, values.password)
             setSubmitting(false);
-          } catch (err) {
+            setStatus({ success: true });
+          } catch (err: any) {
             setStatus({ success: false });
-            setErrors({ submit: String(err) });
+            setErrors({ submit: String(err.message) });
             setSubmitting(false);
           }
         }}
       >
-        {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
+        {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values, status }) => (
            <form noValidate onSubmit={handleSubmit}>
            <Grid container spacing={3}>
              <Grid item xs={12}>
@@ -171,7 +177,11 @@ const PasswordResetForm = () => {
                     <FormHelperText error>{errors.submit}</FormHelperText>
                 </Grid>
               )}
-   
+              {status && status.success && (
+                <Grid item xs={12}>
+                  <Alert severity="success" variant='outlined'>Senha redefinida com sucesso.</Alert>
+                </Grid>
+              )}
              <Grid item xs={12}>
                <Stack spacing={2}>
                  <AnimateButton >

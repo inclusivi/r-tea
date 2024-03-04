@@ -1,5 +1,5 @@
 
-import { signInWithEmailAndPassword, getAuth, createUserWithEmailAndPassword, updateProfile, User as FirebaseUser, updatePassword, reauthenticateWithCredential, EmailAuthProvider, sendPasswordResetEmail } from "firebase/auth";
+import { signInWithEmailAndPassword, getAuth, createUserWithEmailAndPassword, updateProfile, User as FirebaseUser, updatePassword, reauthenticateWithCredential, EmailAuthProvider, sendPasswordResetEmail, confirmPasswordReset } from "firebase/auth";
 import { firebaseApp } from "../config";
 import { ProfileRepo } from "../repositories/ProfileRepo";
 import { User } from "@/modules/user/UserInfo";
@@ -41,6 +41,10 @@ function trataMensagemDeErro(errorCode: string): string {
         case "auth/email-already-in-use":
             return "Este e-mail já está sendo utilizado";
         //espaço pra colocar mais erros acima
+        case "auth/expired-action-code":
+            return "Código de verificação expirado";
+        case "auth/invalid-action-code":
+            return "Código de verificação inválido";
         default:
             return `Erro desconhecido (${errorCode})`;
     }
@@ -107,3 +111,12 @@ export async function changePassword(user: User, oldPassword: string, newPasswor
 export async function sendPasswordChangeEmail(email: string) {
     await sendPasswordResetEmail(auth, email);
 }
+
+export async function resetPassword(oobCode: string, newPassword: string) {
+    try {
+      await confirmPasswordReset(auth, oobCode, newPassword);
+
+    } catch (error) {
+        trataErro(error, "Erro ao redefinir senha");
+    }
+  }
