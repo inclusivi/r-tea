@@ -35,7 +35,7 @@ export default function UserMenu() {
             router.push(route);
         }
     }
-/*bug não tá deslgoando*/
+/*bug não tá deslogando*/
                         /*async*/
     const handleLogout =  () => {
         setUserMenuOpen(false);

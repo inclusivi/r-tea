@@ -20,7 +20,20 @@ type AuthContextProps = {
 }
 
 const auth = getAuth(firebaseApp);
+/*mexida minha de Eduardo*/
+//avidos pra nã ofechar a tela antes do fim diss
+/*export const  corrigibugdeslogar= correcaobugdeslogar
+*/
+//async function correcaobugdeslogar(fechou:boolean) {
+   
+ {/*  se fechou==true  "pode fechar a tela"          senão "ainda desconectando não feche esta tela" */}
+/* let sefechou=(fechou) ? "pode fechar a tela" :"ainda desconectando não feche esta tela " 
+    return sefechou;
+}
 
+*/
+
+/*fim mexida minha de Eduardo*/
 export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     const router = useRouter();
     const pathName = usePathname();
@@ -39,9 +52,9 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         }
     }
 
-    React.useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-            await loadUser(firebaseUser);
+    React.useEffect(() => { /*mexi aqui Eduardo Stivanin C.*/
+        const unsubscribe = onAuthStateChanged(auth, /*async*/ (firebaseUser) => {
+/*            await*/ loadUser(firebaseUser);
             setLoading(false);
         });
 
