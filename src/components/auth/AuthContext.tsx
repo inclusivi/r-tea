@@ -53,11 +53,11 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     }
 
     React.useEffect(() => { /*mexi aqui Eduardo Stivanin C.*/
-        const unsubscribe = onAuthStateChanged(auth, /*async*/ (firebaseUser) => {
-/*            await*/ loadUser(firebaseUser);
-            setLoading(false);
+        const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+            await loadUser(firebaseUser);
+   setLoading(false);
         });
-
+console.log(unsubscribe)
         return () => unsubscribe();
     }, [router]);
 
