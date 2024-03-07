@@ -1,0 +1,4 @@
+Felipe essa ver~so tá dando certo eu tinha reestado e deu certo  não sei como
+pode ser meio lento mas funciona
+
+mexi no AuthContext
