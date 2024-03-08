@@ -3,7 +3,7 @@
 correção funciona?
 
 Edge✔(Eduardo descobriu que sim )
-Brave ✔* (Roger descobriu que não ) chegue precisa desativa r bloqueador de anuncio
+Brave ✔* (Roger descobriu que não ) chegue precisa desativar bloqueador de anuncio
 Chrome ✔ (Eduardo descobriu que ? )
 Opera  ✔* (Eduardo descobriu que requer desativar 
 bloqueador de anuncios pra funciona corretamente )
