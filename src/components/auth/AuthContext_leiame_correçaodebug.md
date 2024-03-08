@@ -3,11 +3,12 @@
 correção funciona?
 
 Edge✔(Eduardo descobriu que sim )
-Brave ❌ (Roger descobriu que não )
+Brave ✔* (Roger descobriu que não ) chegue precisa desativa r bloqueador de anuncio
 Chrome ✔ (Eduardo descobriu que ? )
-Opera  ❌ (Eduardo descobriu que requer desativar 
+Opera  ✔* (Eduardo descobriu que requer desativar 
 bloqueador de anuncios pra funciona corretamente )
 
+*Nesses navegadores precisa  desativar bloqeuador de anúncio pra funcionar
 
 
 - Outros bugs 
