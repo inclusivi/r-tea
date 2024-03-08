@@ -4,10 +4,13 @@ import { Button, FormHelperText, Grid, InputLabel, OutlinedInput, Stack } from "
 import { AnimateButton } from "../shared/elements/AnimatedButton"
 import React from "react";
 import * as Yup from 'yup';
-import { Formik } from "formik";
+import { Formik, FormikBag, FormikValues } from "formik";
 import { sendPasswordChangeEmail } from "@/modules/firebase/services/auth";
+import { useRouter } from 'next/navigation';
 
 export const PasswordRecoverForm = () => {
+    const router = useRouter();
+
     return (
         <>
             <Formik
@@ -18,7 +21,17 @@ export const PasswordRecoverForm = () => {
                     email: Yup.string().email('Deve ser e-mail válido').max(255).required('Favor fornecer seu e-mail')
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
-                    sendPasswordChangeEmail(values.email)
+                    try {
+                        setStatus({ success: false });
+                        await sendPasswordChangeEmail(values.email);
+                        router.push('recoverConfirmation');
+                        setSubmitting(false);
+                    } catch (err) {
+                        console.error(err);
+                        setStatus({ success: false });
+                        setErrors({ email: String(err) });
+                        setSubmitting(false);
+                    }
                 }}
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
@@ -60,6 +73,7 @@ export const PasswordRecoverForm = () => {
                     </form>
                 )}
             </Formik>
+            
         </>
     )
 }
