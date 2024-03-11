@@ -1,3 +1,4 @@
+import React from 'react';
 'use client';
 
 import parents from '@/assets/images/icons/parents.png';
@@ -16,10 +17,7 @@ import { DefaultLoader } from '@/components/loading/DefaultLoader';
 import { getProfileRepository } from '@/modules/firebase';
 import { useRouter } from 'next/navigation';
 import { useAuthContext } from '@/components/auth/AuthContext';
-function correcaodeuralterarrperfil(){
-return "Acesso negado a está pagina" 
 
-}
 function ChoiceCard({ title, description, image, value, selected, onClick }: {
     title: string;
     description: string;
@@ -32,28 +30,8 @@ function ChoiceCard({ title, description, image, value, selected, onClick }: {
 
     return (
         <Grid item xs={12} sm={6} lg={3}>
-            <Card
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: '100%',
-                    bgcolor: cardBgColor,
-                    cursor: 'pointer',
-                }}
-                onClick={() => onClick(value)}
-            >
-                <CardContent sx={{ flexGrow: 1 }}>
-                    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                    <Image src={image} alt={title} width={128} />
-                    </Box>
-                    <Typography gutterBottom variant="h4" component="h2" sx={{ mt: 2 }}>
-                        {title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        {description}
-                    </Typography>
-                </CardContent>
-            </Card>
+           
+           Acesso Negado
         </Grid>
     );
 }
@@ -152,3 +130,12 @@ export default function WelcomePage() {
         </>
     );
 }
+
+
+
+/**//***/
+/*referncias
+  
+https://nextjs.org/
+Ai do CHatGPD
+*/
