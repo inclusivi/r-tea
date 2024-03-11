@@ -65,6 +65,7 @@ export default function WelcomePage() {
     const handleUserKindClick = (userKind: UserKind) => {
         setSelectedUserKind(userKind);
     };
+    
 
     const handleSaveClick = async () => {
         if (selectedUserKind === null) {
