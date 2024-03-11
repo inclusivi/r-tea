@@ -16,6 +16,7 @@ import { DefaultLoader } from '@/components/loading/DefaultLoader';
 import { getProfileRepository } from '@/modules/firebase';
 import { useRouter } from 'next/navigation';
 import { useAuthContext } from '@/components/auth/AuthContext';
+import { UserContext } from '@/modules/context/UserContext';
 //export default function correcaodeuralterarrperfil(){
 
   //  return "<h1 sttyle=>Acesso negado a está pagina<h1>" 
@@ -86,9 +87,12 @@ export default function WelcomePage() {
             setLoading(false);
         }
     };
-
-    return (
-        <>
+    //se for  suario.tipo.userkinfd diferente de nulo  cai em pagian acesso negado
+    if (user?.profile.userKind != null  ) {
+    return  
+    } 
+        return (
+            <>
             <Modal open={loading} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <DefaultLoader />
             </Modal>
@@ -104,7 +108,7 @@ export default function WelcomePage() {
                     selected={selectedUserKind}
                     onClick={handleUserKindClick}
                     image={parents}
-                />
+                    />
                 <ChoiceCard
                     title={UserKindDescriptions[UserKind.ProfissionalSaude]}
                     description='Médicos, terapeutas, psicólogos e outros especialistas envolvidos no cuidado e no tratamento da pessoa autista. Permite adicionar e visualizar os registros dos pacientes, visualizar relatórios especializados e priorizar opções de registros de acordo com plano terapeurico.'
@@ -136,7 +140,7 @@ export default function WelcomePage() {
                     selected={selectedUserKind}
                     onClick={handleUserKindClick}
                     image={autistic}
-                />
+                    />
                 <ChoiceCard
                     title={UserKindDescriptions[UserKind.PessoaSemDiagnostico]}
                     description='Aquelas pessoas que ainda estão em sua jornada de descoberta e querem experimentar a plataforma, mas ainda não têm um diagnóstico definido. Dá acesso as mesmas funções que a pessoa autista.'
@@ -144,7 +148,7 @@ export default function WelcomePage() {
                     selected={selectedUserKind}
                     onClick={handleUserKindClick}
                     image={personInDiscover}
-                />
+                    />
             </Grid>
 
             <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end' }}>
