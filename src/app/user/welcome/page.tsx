@@ -16,10 +16,11 @@ import { DefaultLoader } from '@/components/loading/DefaultLoader';
 import { getProfileRepository } from '@/modules/firebase';
 import { useRouter } from 'next/navigation';
 import { useAuthContext } from '@/components/auth/AuthContext';
-function correcaodeuralterarrperfil(){
-return "Acesso negado a está pagina" 
+//export default function correcaodeuralterarrperfil(){
 
-}
+  //  return "<h1 sttyle=>Acesso negado a está pagina<h1>" 
+
+//}
 function ChoiceCard({ title, description, image, value, selected, onClick }: {
     title: string;
     description: string;
