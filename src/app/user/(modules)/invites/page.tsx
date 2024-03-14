@@ -17,6 +17,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import PersonPicker from "@/components/pickers/PersonPicker";
 import PessoasEmptyState from "@/components/common/PessoasEmptyState";
 
+//para tque faz oalerta de sucesso companoente Alert do Mui
+import Alert from '@mui/material/Alert';
+
 type SituacaoConvite = 'pending' | 'accepted' | 'none';
 
 type ProfileCardProps = {
@@ -189,8 +192,24 @@ export default function InvitesPage() {
 
     const selectedPerson = pessoas.find(p => p.id === selectedPersonId);
     const convidados = profiles.filter((profile) => isConvidado(profile, selectedPerson));
-    const naoConvidados = profiles.filter((profile) => !isConvidado(profile, selectedPerson));
+    //const naoConvidados = profiles.filter((profile) => !isConvidado(profile, selectedPerson));
 
+//se onvite aceito
+    /*if (condition) {
+  return <center>
+  <Alert severity="success">
+  Convite foi aceito
+  </Alert>
+  </center>
+
+}*/
+
+
+/*referências
+
+https://mui.com/material-ui/react-alert/
+*/
+    
     return (
         <>
             <LoadingModal visible={pending} />
