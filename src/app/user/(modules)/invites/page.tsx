@@ -21,7 +21,7 @@ import PessoasEmptyState from "@/components/common/PessoasEmptyState";
 import Alert from '@mui/material/Alert';
 
 //meu arquivo externo  de convite aceito
-import ConviteAceito from "@/components/common/conviteaceito";
+import ConviteAceito, { inputtipoconvite } from "@/components/common/conviteaceito";
 
 type SituacaoConvite = 'pending' | 'accepted' | 'none';
 
@@ -198,11 +198,12 @@ export default function InvitesPage() {
    const naoConvidados = profiles.filter((profile) => !isConvidado(profile, selectedPerson));
    
 //se convite aceito retorn minha pagian de convite aceito
-/*if (convidados) {
+/*if (convidado
+) {
   return   ConviteAceito
 
 }*/
-
+inputtipoconvite()
 
 
 /*referências
