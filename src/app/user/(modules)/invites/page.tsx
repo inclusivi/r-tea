@@ -20,6 +20,9 @@ import PessoasEmptyState from "@/components/common/PessoasEmptyState";
 //para tque faz oalerta de sucesso companoente Alert do Mui
 import Alert from '@mui/material/Alert';
 
+//meu arquivo externo  de convite aceito
+import ConviteAceito from "@/components/common/conviteaceito";
+
 type SituacaoConvite = 'pending' | 'accepted' | 'none';
 
 type ProfileCardProps = {
@@ -193,16 +196,13 @@ export default function InvitesPage() {
     const selectedPerson = pessoas.find(p => p.id === selectedPersonId);
     const convidados = profiles.filter((profile) => isConvidado(profile, selectedPerson));
    const naoConvidados = profiles.filter((profile) => !isConvidado(profile, selectedPerson));
-
-//se onvite aceito
-    /*if (convidados) {
-  return <center>
-  <Alert severity="success">
-  Convite foi aceito
-  </Alert>
-  </center>
+   
+//se convite aceito retorn minha pagian de convite aceito
+/*if (convidados) {
+  return   ConviteAceito
 
 }*/
+
 
 
 /*referências
