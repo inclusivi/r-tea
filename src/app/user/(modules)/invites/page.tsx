@@ -192,10 +192,10 @@ export default function InvitesPage() {
 
     const selectedPerson = pessoas.find(p => p.id === selectedPersonId);
     const convidados = profiles.filter((profile) => isConvidado(profile, selectedPerson));
-    //const naoConvidados = profiles.filter((profile) => !isConvidado(profile, selectedPerson));
+   const naoConvidados = profiles.filter((profile) => !isConvidado(profile, selectedPerson));
 
 //se onvite aceito
-    /*if (condition) {
+    /*if (convidados) {
   return <center>
   <Alert severity="success">
   Convite foi aceito
