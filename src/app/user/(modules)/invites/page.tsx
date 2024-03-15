@@ -22,7 +22,7 @@ import Alert from '@mui/material/Alert';
 
 //meu arquivo externo  de convite aceito
 import ConviteAceito, { inputtipoconvite } from "@/components/common/conviteaceito";
-
+import { Input } from '@mui/base/Input';
 type SituacaoConvite = 'pending' | 'accepted' | 'none';
 
 type ProfileCardProps = {
@@ -188,6 +188,12 @@ export default function InvitesPage() {
     if (pessoas.length === 0) return (
         <>
             <Typography variant="h3" color='primary'>Enviar Convite</Typography>
+             {/*Eduardo fez o input convite botão de neivar com inpu de convite
+             */ }
+
+             <Input type="email" id="emailconvite" name="emailconvite" />
+             <Input type="submit" />
+             {/*fim Eduardo mexeu*/}
             <Divider sx={{ mt: 1, mb: 3 }} />
             <PessoasEmptyState />
         </>
@@ -203,7 +209,7 @@ export default function InvitesPage() {
   return   ConviteAceito
 
 }*/
-inputtipoconvite()
+
 
 
 /*referências
@@ -238,6 +244,11 @@ https://mui.com/material-ui/react-alert/
                         {naoConvidados.length > 0 && (
                             <>
                                 <Typography variant="h5" color='primary' sx={{ mt: 3 }}>Enviar convite para</Typography>
+                                {/*<.import { Input } from '@mui/base/Input';
+                                compenente de campo de inserir 
+                                */}
+ 
+				
                                 {naoConvidados.map(profile => (<ProfileCard key={profile.userId} profile={profile} situacaoConvite={getSituacaoConvite(profile)} onInvite={handleConvidar} />))}
                             </>
                         )}
