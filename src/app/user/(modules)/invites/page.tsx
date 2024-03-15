@@ -191,8 +191,7 @@ export default function InvitesPage() {
              {/*Eduardo fez o input convite botão de neivar com inpu de convite
              */ }
 
-             <Input type="email" id="emailconvite" name="emailconvite" />
-             <Input type="submit" />
+             
              {/*fim Eduardo mexeu*/}
             <Divider sx={{ mt: 1, mb: 3 }} />
             <PessoasEmptyState />
@@ -248,7 +247,7 @@ https://mui.com/material-ui/react-alert/
                                 compenente de campo de inserir 
                                 */}
  
-				
+				<Input></Input>
                                 {naoConvidados.map(profile => (<ProfileCard key={profile.userId} profile={profile} situacaoConvite={getSituacaoConvite(profile)} onInvite={handleConvidar} />))}
                             </>
                         )}
