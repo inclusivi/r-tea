@@ -6,7 +6,7 @@ import { User } from "@/modules/user/UserInfo";
 import { updateDocument } from "./database";
 import { FirebaseError } from "firebase/app";
 
-const auth = getAuth(firebaseApp);
+export const auth = getAuth(firebaseApp);
 
 export async function login(email: string, password: string) {
     try {
@@ -112,11 +112,11 @@ export async function sendPasswordChangeEmail(email: string) {
     await sendPasswordResetEmail(auth, email);
 }
 
-export async function resetPassword(oobCode: string, newPassword: string) {
+export async function verifyResetCode(oobCode: string) {
     try {
-      await confirmPasswordReset(auth, oobCode, newPassword);
+        await confirmPasswordReset(auth, oobCode, newPassword);
 
     } catch (error) {
-        trataErro(error, "Erro ao redefinir senha");
+        trataErro(error, "Código de verificação inválido ou expirado");
     }
   }
