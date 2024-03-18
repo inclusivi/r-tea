@@ -16,6 +16,7 @@ import { DefaultLoader } from '@/components/loading/DefaultLoader';
 import { getProfileRepository } from '@/modules/firebase';
 import { useRouter } from 'next/navigation';
 import { useAuthContext } from '@/components/auth/AuthContext';
+import AcessoNegado from "@/components/common/AcessoNegado";
 
 function ChoiceCard({ title, description, image, value, selected, onClick }: {
     title: string;
@@ -81,6 +82,10 @@ export default function WelcomePage() {
             setLoading(false);
         }
     };
+    
+    if (user?.profile.userKind != null) {
+      return AcessoNegado();
+    }
 
     return (
         <>
