@@ -251,11 +251,11 @@ https://mui.com/material-ui/react-alert/
                                */}
  {/* código do campo de enviaro com o botão de enviar falta a progrmalaõpa ainda*/}
  <center>
-				<Input ></Input>
-                <Button><SendOutlined></SendOutlined></Button></center>
+				<Input></Input>
+                <Button>Convidar<SendOutlined></SendOutlined></Button></center>
 
 {/*fim do código do botão de enviar*/}
-               
+
                                {naoConvidados.map(profile => (<ProfileCard key={profile.userId} profile={profile} situacaoConvite={getSituacaoConvite(profile)} onInvite={handleConvidar} />))}
                             </>
                         )}
