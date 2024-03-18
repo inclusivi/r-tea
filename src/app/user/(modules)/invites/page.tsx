@@ -23,6 +23,8 @@ import Alert from '@mui/material/Alert';
 //meu arquivo externo  de convite aceito
 import ConviteAceito, { inputtipoconvite } from "@/components/common/conviteaceito";
 import { Input } from '@mui/base/Input';
+import { Send } from "@mui/icons-material";
+import { SendOutlined } from "@ant-design/icons";
 type SituacaoConvite = 'pending' | 'accepted' | 'none';
 
 type ProfileCardProps = {
@@ -170,6 +172,7 @@ export default function InvitesPage() {
             await repo.cancelInvite(selectedPerson, userId);
 
             const pessoas = await repo.getPessoas();
+     
             setPessoas(pessoas);
         } finally {
             setPending(false);
@@ -245,10 +248,15 @@ https://mui.com/material-ui/react-alert/
                                 <Typography variant="h5" color='primary' sx={{ mt: 3 }}>Enviar convite para</Typography>
                                 {/*<.import { Input } from '@mui/base/Input';
                                 compenente de campo de inserir 
-                                */}
- 
-				<Input></Input>
-                                {naoConvidados.map(profile => (<ProfileCard key={profile.userId} profile={profile} situacaoConvite={getSituacaoConvite(profile)} onInvite={handleConvidar} />))}
+                               */}
+ {/* código do campo de enviaro com o botão de enviar falta a progrmalaõpa ainda*/}
+ <center>
+				<Input ></Input>
+                <Button><SendOutlined></SendOutlined></Button></center>
+
+{/*fim do código do botão de enviar*/}
+               
+                               {naoConvidados.map(profile => (<ProfileCard key={profile.userId} profile={profile} situacaoConvite={getSituacaoConvite(profile)} onInvite={handleConvidar} />))}
                             </>
                         )}
                     </Box>
