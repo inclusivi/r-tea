@@ -1,12 +1,12 @@
 
-import { signInWithEmailAndPassword, getAuth, createUserWithEmailAndPassword, updateProfile, User as FirebaseUser, updatePassword, reauthenticateWithCredential, EmailAuthProvider, sendPasswordResetEmail, confirmPasswordReset } from "firebase/auth";
+import { signInWithEmailAndPassword, getAuth, createUserWithEmailAndPassword, updateProfile, User as FirebaseUser, updatePassword, reauthenticateWithCredential, EmailAuthProvider, sendPasswordResetEmail, checkActionCode, ActionCodeInfo, confirmPasswordReset } from "firebase/auth";
 import { firebaseApp } from "../config";
 import { ProfileRepo } from "../repositories/ProfileRepo";
 import { User } from "@/modules/user/UserInfo";
 import { updateDocument } from "./database";
 import { FirebaseError } from "firebase/app";
 
-export const auth = getAuth(firebaseApp);
+const auth = getAuth(firebaseApp);
 
 export async function login(email: string, password: string) {
     try {
@@ -112,11 +112,19 @@ export async function sendPasswordChangeEmail(email: string) {
     await sendPasswordResetEmail(auth, email);
 }
 
-export async function verifyResetCode(oobCode: string) {
+export async function resetPassword(oobCode: string, newPassword: string) {
     try {
         await confirmPasswordReset(auth, oobCode, newPassword);
+    } catch (error) {
+        trataErro(error, "Erro ao redefinir senha");
+    }
+}
 
+export async function validateActionCode(oobCode: string): Promise<ActionCodeInfo> {
+    try {
+        const actionCodeInfo = await checkActionCode(auth, oobCode);
+        return actionCodeInfo;
     } catch (error) {
         trataErro(error, "Código de verificação inválido ou expirado");
     }
-  }
+}

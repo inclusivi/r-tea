@@ -1,19 +1,16 @@
 'use client'
 
 import React,  { useEffect, useState } from 'react'
-import { useSearchParams, useRouter } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { Grid, Stack, Typography } from "@mui/material"
 
 import PasswordResetForm from '@/components/auth/PasswordResetForm'
-import { auth } from '@/modules/firebase/services/auth'
-import { verifyResetCode } from '@/modules/firebase/services/auth'
-
+import { validateActionCode } from '@/modules/firebase/services/auth'
 
 const RecoverPage = () => {
   const [isEmailCodeValid, setIsEmailCodeValid] = useState(true);
   const [isCodeChecking, setIsCodeChecking] = useState(true);
   const [oobCode, setOobCode] = useState('');
-  const router = useRouter();
   
   const searchParams = useSearchParams();
   
@@ -23,7 +20,7 @@ const RecoverPage = () => {
         const oobCodeFromParams = searchParams.get('oobCode');
         if (oobCodeFromParams) {
           setOobCode(oobCodeFromParams);
-          await verifyResetCode(oobCodeFromParams);
+          await validateActionCode(oobCodeFromParams);
           setIsEmailCodeValid(true);
         } else {
           setIsEmailCodeValid(false);
