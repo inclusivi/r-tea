@@ -250,13 +250,15 @@ export default function InvitesPage() {
                                */}
                                 {/* código do campo de enviaro com o botão de enviar falta a progrmalaõpa ainda*/}
                                 <center>
-                                    <form action="" method="post">
-                                    <Input></Input>
+                                    {/*<form action="" method="post">*/}
+                                   <Input placeholder="E-mail"></Input>
+
+                                   <Input placeholder="Nome da pessoa convidada"></Input>
                                    {/*  em src\app\common\conviteaceito.tsx onclick enviar
                                    de enviar
                                    onClick={}*/}
                                     <Button  onClick={enviarconvite}>Convidar<SendOutlined></SendOutlined></Button>
-                                    </form> 
+         {/*</form>*/}
                               
                                 </center>
 
