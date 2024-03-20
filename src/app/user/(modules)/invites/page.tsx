@@ -258,7 +258,10 @@ export default function InvitesPage() {
                                     <Button  onClick={enviarconvite}>Convidar<SendOutlined></SendOutlined></Button>
                                 </center>
 
-                                {/*fim do código do botão de enviar*/}
+                                {/*fim do código do botão de enviar
+                                referências Aplicacoes Web Real Time com Node-js - Casa do Codigo
+                                
+                                */}
 
                                 {naoConvidados.map(profile => (<ProfileCard key={profile.userId} profile={profile} situacaoConvite={getSituacaoConvite(profile)} onInvite={handleConvidar} />))}
                             </>
