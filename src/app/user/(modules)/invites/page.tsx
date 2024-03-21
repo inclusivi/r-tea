@@ -17,6 +17,14 @@ import { useRouter, useSearchParams } from "next/navigation";
 import PersonPicker from "@/components/pickers/PersonPicker";
 import PessoasEmptyState from "@/components/common/PessoasEmptyState";
 
+//para tque faz oalerta de sucesso companoente Alert do Mui
+import Alert from '@mui/material/Alert';
+
+//meu arquivo externo  de convite aceito
+import { Input } from '@mui/base/Input';
+import { SendOutlined } from "@ant-design/icons";
+import { enviarconvite } from "@/components/common/conviteaceito";
+import { Label } from "@mui/icons-material";
 type SituacaoConvite = 'pending' | 'accepted' | 'none';
 
 type ProfileCardProps = {
@@ -57,14 +65,14 @@ function ProfileCard({ profile, situacaoConvite, onInvite }: ProfileCardProps) {
                         <Typography variant="h6">{UserKindDescriptions[profile.userKind ?? UserKind.Guest]}</Typography>
                     </Box>
                     {situacaoConvite != 'none' &&
-                            <Chip
-                                size="small"
-                                label={situacaoConvite == "pending" ? 'Pendente' : 'Aceito'}
-                                color={situacaoConvite == "pending" ? 'default' : 'success'}
-                            />
-                        }
+                        <Chip
+                            size="small"
+                            label={situacaoConvite == "pending" ? 'Pendente' : 'Aceito'}
+                            color={situacaoConvite == "pending" ? 'default' : 'success'}
+                        />
+                    }
 
-                    <Box sx={{ display: { xs: 'none', sm: 'flex' }, flexDirection: {sm: 'row', md: 'row'}, gap: 2 }}>
+                    <Box sx={{ display: { xs: 'none', sm: 'flex' }, flexDirection: { sm: 'row', md: 'row' }, gap: 2 }}>
                         <ProfileCardActions variant="outlined" />
                     </Box>
                 </Box>
@@ -164,6 +172,7 @@ export default function InvitesPage() {
             await repo.cancelInvite(selectedPerson, userId);
 
             const pessoas = await repo.getPessoas();
+
             setPessoas(pessoas);
         } finally {
             setPending(false);
@@ -182,6 +191,11 @@ export default function InvitesPage() {
     if (pessoas.length === 0) return (
         <>
             <Typography variant="h3" color='primary'>Enviar Convite</Typography>
+            {/*Eduardo fez o input convite botão de neivar com inpu de convite
+             */ }
+
+
+            {/*fim Eduardo mexeu*/}
             <Divider sx={{ mt: 1, mb: 3 }} />
             <PessoasEmptyState />
         </>
@@ -190,6 +204,20 @@ export default function InvitesPage() {
     const selectedPerson = pessoas.find(p => p.id === selectedPersonId);
     const convidados = profiles.filter((profile) => isConvidado(profile, selectedPerson));
     const naoConvidados = profiles.filter((profile) => !isConvidado(profile, selectedPerson));
+
+    //se convite aceito retorn minha pagian de convite aceito
+    /*if (convidado
+    ) {
+      return   ConviteAceito
+    
+    }*/
+
+
+
+    /*referências
+    
+    https://mui.com/material-ui/react-alert/
+    */
 
     return (
         <>
@@ -218,6 +246,33 @@ export default function InvitesPage() {
                         {naoConvidados.length > 0 && (
                             <>
                                 <Typography variant="h5" color='primary' sx={{ mt: 3 }}>Enviar convite para</Typography>
+                                {/*<.import { Input } from '@mui/base/Input';
+                                compenente de campo de inserir 
+                               */}
+                                {/* código do campo de enviaro com o botão de enviar falta a progrmalaõpa ainda*/}
+                                <center>
+                                    {/*<form action="" method="post">
+                                    
+                                    Label comn L maiusculo  figurinha de  ponta de seta apontoando pra direita já  label com l minusculo ´´e caixa de texto somente leitura do html
+                                   */}
+                            <label>E-mail</label> <Input placeholder="E-mail"></Input>
+
+                            <label>Nome do(a) convidado(a)</label>     <Input placeholder="Nome do(a) convidado(a)"></Input>
+                                   {/*  em src\app\common\conviteaceito.tsx onclick enviar
+                                   de enviar
+                                   onClick={}*/}
+                                </center>
+                                    <Button  onClick={enviarconvite}>Convidar<SendOutlined></SendOutlined></Button>
+                                                                                   {/*a imagem de aviazinho de papel pra enviar ter centralizado automoatimanet epla biblitoeca Mui */}                 
+         {/*</form>*/}
+                              
+                                
+
+                                {/*fim do código do botão de enviar
+                                referências Aplicacoes Web Real Time com Node-js - Casa do Codigo
+                                
+                                */}
+
                                 {naoConvidados.map(profile => (<ProfileCard key={profile.userId} profile={profile} situacaoConvite={getSituacaoConvite(profile)} onInvite={handleConvidar} />))}
                             </>
                         )}
