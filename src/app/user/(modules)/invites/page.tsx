@@ -24,6 +24,7 @@ import Alert from '@mui/material/Alert';
 import { Input } from '@mui/base/Input';
 import { SendOutlined } from "@ant-design/icons";
 import { enviarconvite } from "@/components/common/conviteaceito";
+import { Label } from "@mui/icons-material";
 type SituacaoConvite = 'pending' | 'accepted' | 'none';
 
 type ProfileCardProps = {
@@ -250,17 +251,22 @@ export default function InvitesPage() {
                                */}
                                 {/* código do campo de enviaro com o botão de enviar falta a progrmalaõpa ainda*/}
                                 <center>
-                                    {/*<form action="" method="post">*/}
-                                   <Input placeholder="E-mail"></Input>
+                                    {/*<form action="" method="post">
+                                    
+                                    Label comn L maiusculo  figurinha de  ponta de seta apontoando pra direita já  label com l minusculo ´´e caixa de texto somente leitura do html
+                                   */}
+                            <label>E-mail</label> <Input placeholder="E-mail"></Input>
 
-                                   <Input placeholder="Nome da pessoa convidada"></Input>
+                            <label>Nome do(a) convidado(a)</label>     <Input placeholder="Nome do(a) convidado(a)"></Input>
                                    {/*  em src\app\common\conviteaceito.tsx onclick enviar
                                    de enviar
                                    onClick={}*/}
+                                </center>
                                     <Button  onClick={enviarconvite}>Convidar<SendOutlined></SendOutlined></Button>
+                                                                                   {/*a imagem de aviazinho de papel pra enviar ter centralizado automoatimanet epla biblitoeca Mui */}                 
          {/*</form>*/}
                               
-                                </center>
+                                
 
                                 {/*fim do código do botão de enviar
                                 referências Aplicacoes Web Real Time com Node-js - Casa do Codigo
