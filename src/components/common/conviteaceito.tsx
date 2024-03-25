@@ -7,7 +7,7 @@ import { Input } from '@mui/base/Input';
 
 
 
-export function enviarconvite ()
+export function gravardados ()
 {
  
  

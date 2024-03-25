@@ -23,7 +23,7 @@ import Alert from '@mui/material/Alert';
 //meu arquivo externo  de convite aceito
 import { Input } from '@mui/base/Input';
 import { SendOutlined } from "@ant-design/icons";
-import { enviarconvite } from "@/components/common/conviteaceito";
+import { enviarconvite, gravardados } from "@/components/common/conviteaceito";
 import { Label } from "@mui/icons-material";
 type SituacaoConvite = 'pending' | 'accepted' | 'none';
 
@@ -262,7 +262,7 @@ export default function InvitesPage() {
                                    de enviar
                                    onClick={}*/}
                                 </center>
-                                    <Button  onClick={enviarconvite}>Convidar<SendOutlined></SendOutlined></Button>
+                                    <Button  onClick={gravardados}>Salvar<SendOutlined></SendOutlined></Button>
                                                                                    {/*a imagem de aviazinho de papel pra enviar ter centralizado automoatimanet epla biblitoeca Mui */}                 
          {/*</form>*/}
                               
