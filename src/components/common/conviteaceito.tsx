@@ -67,5 +67,40 @@ const { userCtx } = useAuthContext();
   
   );
 }
+/*
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+*/
+/// Inicialize o Firebase
+/*if (!firebase.apps.length) {
+  firebase.initializeApp({
+    // Sua configuração do Firebase
+  });
+}
+
+// Obtenha uma referência para o banco de dados
+const db = firebase.firestore();
+
+// Adicione um novo documento com um ID gerado automaticamente
+db.collection("minhaColecao").add({
+    campo1: "valor1",
+    campo2: "valor2",
+})
+.then((docRef) => {
+    console.log("Documento escrito com ID: ", docRef.id);
+})
+.catch((error) => {
+    console.error("Erro ao adicionar documento: ", error);
+});
+
 //https://mui.com/material-ui/react-alert/
 //https://mui.com/base-ui/react-input/
+https://firebase.google.com/codelabs/firebase-nextjs
+https://firebase.google.com/codelabs/firebase-nextjs
+https://makerkit.dev/docs/next-fire/reading-data-storage
+https://dev.to/reeshee/how-to-use-firebase-storage-to-upload-and-retrieve-files-in-nextjs-pages-router-2p16
+https://makerkit.dev/docs/next-fire/reading-data-storage
+https://www.freecodecamp.org/news/create-full-stack-app-with-nextjs13-and-firebase/
+https://www.freecodecamp.org/news/create-full-stack-app-with-nextjs13-and-firebase/
+https://stackoverflow.com/questions/59297604/how-to-use-firebase-cloud-firestore-database-in-a-next-js-project-how-to-initia
+https://blog.logrocket.com/nextjs-cloud-firestore-full-stack-app-tutorial/
