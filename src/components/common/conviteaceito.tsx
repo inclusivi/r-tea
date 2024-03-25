@@ -43,7 +43,7 @@ export function gravardados ()
       //alerta de convite enviado usadno o bjeto Alert pre construido de bibliopteca Mui
       <center>
      <Alert severity="success">
-     Convite foi enviado
+     Convite foi salvo
      </Alert>
      </center>
      
