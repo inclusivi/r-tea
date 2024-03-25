@@ -10,12 +10,19 @@ import { Input } from '@mui/base/Input';
 export function enviarconvite ()
 {
  
-  let nome=''
+ 
   
   //enviar email e convite
+  
+  //e-amil da da pessoa convidada
   let para =""
+
+  //assunto da mensagem enviada
   let assunto ="convidate à R-TEA "
   
+  
+  //texto da mensagem enviada por e-mail
+  let nome='' 
   const mensagemtextosoRogereEdu=`
   
   Olá, Sr(a) ${nome}!
