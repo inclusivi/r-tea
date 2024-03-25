@@ -5,6 +5,8 @@ import { Alert } from "@mui/material";
 //inporta input preformataod no cSS do Mui  doa Blibloteca
 import { Input } from '@mui/base/Input';
 
+
+
 export function enviarconvite ()
 {
  
@@ -29,6 +31,25 @@ export function enviarconvite ()
 
 export default function ConviteAceito() {
 const { userCtx } = useAuthContext();
+
+let nome=''
+
+//enviar email e convite
+let para =""
+let assunto ="convidate à R-TEA "
+const mensagemtextosoRogereEdu=`
+
+Olá, Sr(a) ${nome}!
+
+Você foi convidado(a) à R-TEA, uma plataforma de tratamento de pessoas autistas. Este convite foi enviado(a) por um(a) paciente, diagnosticado(a) com autismo ou em jornada de descoberta e este(a) escolheu o senhor(a) para participar da plataforma e entrar em contato contigo através desta. Para tal, é necessário registrar uma conta na plataforma R-TEA.
+
+ Siga o link abaixo para seguir à página de registro:
+
+Uma vez nessa pagina, selecione a opção 'Profissional de Saúde' e preencha suas informações profissionais em seu perfil.
+
+`
+
+
 
     return (
    <center>
