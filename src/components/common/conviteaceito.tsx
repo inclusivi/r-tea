@@ -28,15 +28,12 @@ export function enviarconvite ()
    // return "convite com em construção site em manutenção ou deu erro"  
    //}
 }
-
-export default function ConviteAceito() {
-const { userCtx } = useAuthContext();
-
 let nome=''
 
 //enviar email e convite
 let para =""
 let assunto ="convidate à R-TEA "
+
 const mensagemtextosoRogereEdu=`
 
 Olá, Sr(a) ${nome}!
@@ -48,6 +45,9 @@ Você foi convidado(a) à R-TEA, uma plataforma de tratamento de pessoas autista
 Uma vez nessa pagina, selecione a opção 'Profissional de Saúde' e preencha suas informações profissionais em seu perfil.
 
 `
+export default function ConviteAceito() {
+const { userCtx } = useAuthContext();
+
 
 
 
