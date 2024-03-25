@@ -5,8 +5,7 @@ import { Alert } from "@mui/material";
 //inporta input preformataod no cSS do Mui  doa Blibloteca
 import { Input } from "@mui/base/Input";
 
-export async function gravarDados() {
-  "use server";
+export async function gravardados() {
   //enviar email e convite
 
   //e-amil da da pessoa convidada

@@ -37,8 +37,14 @@ import PessoasEmptyState from "@/components/common/PessoasEmptyState";
 //meu arquivo externo  de convite aceito
 import { Input } from "@mui/base/Input";
 import { SendOutlined } from "@ant-design/icons";
+<<<<<<< HEAD
 import { gravarDados } from "@/components/common/conviteaceito";
 type SituacaoConvite = "pending" | "accepted" | "none";
+=======
+import {  gravardados } from "@/components/common/conviteaceito";
+import { Email, Label } from "@mui/icons-material";
+type SituacaoConvite = 'pending' | 'accepted' | 'none';
+>>>>>>> 4d86e43ff1a951470a18b8fd0be5d6c3cc0a7c21
 
 type ProfileCardProps = {
   profile: UserProfile;
@@ -346,6 +352,7 @@ export default function InvitesPage() {
               {/*<.import { Input } from '@mui/base/Input';
                                 compenente de campo de inserir 
                                */}
+<<<<<<< HEAD
               {/* código do campo de enviaro com o botão de enviar falta a progrmalaõpa ainda*/}
               <form
                 action={}
@@ -394,3 +401,47 @@ export default function InvitesPage() {
     </>
   );
 }
+=======
+                                {/* código do campo de enviaro com o botão de enviar falta a progrmalaõpa ainda*/}
+                                  <form action={gravardados} method="post">
+                                <center>
+                                    
+                                  {/*  Label comn L maiusculo  figurinha de  ponta de seta apontoando pra direita já  label com l minusculo ´´e caixa de texto somente leitura do html
+                                   */}
+                            <label>E-mail</label> <Input name="email" placeholder="E-mail"></Input>
+
+                            <label>Nome do(a) convidado(a)</label>     <Input  name="nome" placeholder="Nome do(a) convidado(a)"></Input>
+                                   {/*  em src\app\common\conviteaceito.tsx onclick enviar
+                                   de enviar
+                                   onClick={}*/}
+                                
+                                {//onClick={gravardados("email",'nome')}
+                                
+                                }
+                              <button type="submit" >                                    
+                                        Salvar<SendOutlined></SendOutlined></button>
+                            
+                            </center>
+                              </form>
+
+                              
+                              
+        {/*a imagem de aviazinho de papel pra enviar ter centralizado automoatimanet epla biblitoeca Mui */}                 
+                              
+                                
+
+                                {/*fim do código do botão de enviar
+                                referências Aplicacoes Web Real Time com Node-js - Casa do Codigo
+                                
+                                */}
+
+                                {naoConvidados.map(profile => (<ProfileCard key={profile.userId} profile={profile} situacaoConvite={getSituacaoConvite(profile)} onInvite={handleConvidar} />))}
+                            </>
+                        )}
+                    </Box>
+                )
+            }
+        </>
+    );
+}
+>>>>>>> 4d86e43ff1a951470a18b8fd0be5d6c3cc0a7c21
