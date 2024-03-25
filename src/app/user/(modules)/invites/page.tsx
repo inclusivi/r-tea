@@ -23,8 +23,8 @@ import Alert from '@mui/material/Alert';
 //meu arquivo externo  de convite aceito
 import { Input } from '@mui/base/Input';
 import { SendOutlined } from "@ant-design/icons";
-import { enviarconvite, gravardados } from "@/components/common/conviteaceito";
-import { Label } from "@mui/icons-material";
+import {  gravardados } from "@/components/common/conviteaceito";
+import { Email, Label } from "@mui/icons-material";
 type SituacaoConvite = 'pending' | 'accepted' | 'none';
 
 type ProfileCardProps = {
@@ -250,21 +250,30 @@ export default function InvitesPage() {
                                 compenente de campo de inserir 
                                */}
                                 {/* código do campo de enviaro com o botão de enviar falta a progrmalaõpa ainda*/}
+                                  <form action={gravardados} method="post">
                                 <center>
-                                    {/*<form action="" method="post">
                                     
-                                    Label comn L maiusculo  figurinha de  ponta de seta apontoando pra direita já  label com l minusculo ´´e caixa de texto somente leitura do html
+                                  {/*  Label comn L maiusculo  figurinha de  ponta de seta apontoando pra direita já  label com l minusculo ´´e caixa de texto somente leitura do html
                                    */}
-                            <label>E-mail</label> <Input placeholder="E-mail"></Input>
+                            <label>E-mail</label> <Input name="email" placeholder="E-mail"></Input>
 
-                            <label>Nome do(a) convidado(a)</label>     <Input placeholder="Nome do(a) convidado(a)"></Input>
+                            <label>Nome do(a) convidado(a)</label>     <Input  name="nome" placeholder="Nome do(a) convidado(a)"></Input>
                                    {/*  em src\app\common\conviteaceito.tsx onclick enviar
                                    de enviar
                                    onClick={}*/}
-                                </center>
-                                    <Button  onClick={gravardados}>Salvar<SendOutlined></SendOutlined></Button>
-                                                                                   {/*a imagem de aviazinho de papel pra enviar ter centralizado automoatimanet epla biblitoeca Mui */}                 
-         {/*</form>*/}
+                                
+                                {//onClick={gravardados("email",'nome')}
+                                
+                                }
+                              <button type="submit" >                                    
+                                        Salvar<SendOutlined></SendOutlined></button>
+                            
+                            </center>
+                              </form>
+
+                              
+                              
+        {/*a imagem de aviazinho de papel pra enviar ter centralizado automoatimanet epla biblitoeca Mui */}                 
                               
                                 
 

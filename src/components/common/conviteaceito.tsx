@@ -6,23 +6,23 @@ import { Alert } from "@mui/material";
 import { Input } from '@mui/base/Input';
 
 
-
-export function gravardados ()
+//asyns continua fazendo outras tarefas enquanto espera terminar a tarefa por desempenho
+/*async*/
+export   function gravardados (data:FormData)
 {
- 
  
   
   //enviar email e convite
   
   //e-amil da da pessoa convidada
-  let para =""
+  let para =data.get("email")
 
   //assunto da mensagem enviada
   let assunto ="convidate à R-TEA "
   
   
   //texto da mensagem enviada por e-mail
-  let nome='' 
+  let nome=data.get("nome")
   const mensagemtextosoRogereEdu=`
   
   Olá, Sr(a) ${nome}!
@@ -70,7 +70,7 @@ const { userCtx } = useAuthContext();
 /*
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-*/
+
 /// Inicialize o Firebase
 /*if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -92,7 +92,7 @@ db.collection("minhaColecao").add({
 .catch((error) => {
     console.error("Erro ao adicionar documento: ", error);
 });
-
+*//*
 //https://mui.com/material-ui/react-alert/
 //https://mui.com/base-ui/react-input/
 https://firebase.google.com/codelabs/firebase-nextjs
@@ -103,4 +103,7 @@ https://makerkit.dev/docs/next-fire/reading-data-storage
 https://www.freecodecamp.org/news/create-full-stack-app-with-nextjs13-and-firebase/
 https://www.freecodecamp.org/news/create-full-stack-app-with-nextjs13-and-firebase/
 https://stackoverflow.com/questions/59297604/how-to-use-firebase-cloud-firestore-database-in-a-next-js-project-how-to-initia
-https://blog.logrocket.com/nextjs-cloud-firestore-full-stack-app-tutorial/
+https://blog.logrocket.com/nextjs-cloud-firestore-full-stack-app-tutorial
+
+https://codante.io/mini-projetos/gerenciador-de-habitos-com-nextjs/resolucao/salvando-os-habitos-no-banco-de-dados]
+*/
