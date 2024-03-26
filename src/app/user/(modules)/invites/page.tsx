@@ -250,28 +250,27 @@ export default function InvitesPage() {
                                 compenente de campo de inserir 
                                */}
                                 {/* código do campo de enviaro com o botão de enviar falta a progrmalaõpa ainda*/}
+                               
+                               <Card>
                                   <form action={gravardados} method="post">
-                                <center>
-                                    
+                             <center>                   
                                   {/*  Label comn L maiusculo  figurinha de  ponta de seta apontoando pra direita já  label com l minusculo ´´e caixa de texto somente leitura do html
-                                   */}
-                            <label>E-mail</label> <Input name="email" placeholder="E-mail"></Input>
-
+                                   */}        
+                            <label>E-mail</label> <Input  name="email"  placeholder="E-mail"></Input>
                             <label>Nome do(a) convidado(a)</label>     <Input  name="nome" placeholder="Nome do(a) convidado(a)"></Input>
+                            </center>
                                    {/*  em src\app\common\conviteaceito.tsx onclick enviar
                                    de enviar
                                    onClick={}*/}
                                 
-                                {//onClick={gravardados("email",'nome')}
-                                
-                                }
-                              <button type="submit" >                                    
-                                        Salvar<SendOutlined></SendOutlined></button>
+                
+                              <button type="submit" >  Salvar<SendOutlined></SendOutlined></button>
+                            <Button onClick={gravardados}  variant="outlined"  color="primary">Salvar<SendOutlined></SendOutlined></Button>
                             
-                            </center>
                               </form>
 
                               
+                              </Card>
                               
         {/*a imagem de aviazinho de papel pra enviar ter centralizado automoatimanet epla biblitoeca Mui */}                 
                               
