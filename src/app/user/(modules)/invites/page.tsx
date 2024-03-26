@@ -253,7 +253,7 @@ export default function InvitesPage() {
                                
                                <Card>
                                   <form action={gravardados} method="post">
-                             <center>                   
+                         <center>                   
                                   {/*  Label comn L maiusculo  figurinha de  ponta de seta apontoando pra direita já  label com l minusculo ´´e caixa de texto somente leitura do html
                                    */}        
                             <label>E-mail</label> <Input  name="email"  placeholder="E-mail"></Input>
@@ -266,7 +266,6 @@ export default function InvitesPage() {
                 
                               <button type="submit" >  Salvar<SendOutlined></SendOutlined></button>
                             <Button onClick={gravardados}  variant="outlined"  color="primary">Salvar<SendOutlined></SendOutlined></Button>
-                            
                               </form>
 
                               
