@@ -1,393 +1,293 @@
-"use client";
+'use client';
 
 import { useAuthContext } from "@/components/auth/AuthContext";
 import LoadingModal from "@/components/loading/LoadingModal";
 import EmptyState from "@/components/shared/elements/EmptyState";
 import { getProfileRepository } from "@/modules/firebase";
 import { Pessoa } from "@/modules/firebase/models/Pessoa";
-import {
-  UserKind,
-  UserKindDescriptions,
-} from "@/modules/firebase/models/UserKind";
+import { UserKind, UserKindDescriptions } from "@/modules/firebase/models/UserKind";
 import { UserProfile } from "@/modules/firebase/models/UserProfile";
 import { PessoaRepo } from "@/modules/firebase/repositories/PessoaRepo";
-import {
-  Avatar,
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Chip,
-  Divider,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Avatar, Box, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Chip, Divider, Menu, MenuItem, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
-import cover from "@/assets/images/profile-cover.jpg";
+import cover from '@/assets/images/profile-cover.jpg';
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import PersonPicker from "@/components/pickers/PersonPicker";
 import PessoasEmptyState from "@/components/common/PessoasEmptyState";
 
 //para tque faz oalerta de sucesso companoente Alert do Mui
+import Alert from '@mui/material/Alert';
 
 //meu arquivo externo  de convite aceito
-import { Input } from "@mui/base/Input";
+import { Input } from '@mui/base/Input';
 import { SendOutlined } from "@ant-design/icons";
-import { gravardados } from "@/components/common/conviteaceito";
-type SituacaoConvite = "pending" | "accepted" | "none";
+import {  gravardados } from "@/components/common/conviteaceito";
+import { Email, Label } from "@mui/icons-material";
+type SituacaoConvite = 'pending' | 'accepted' | 'none';
 
 type ProfileCardProps = {
-  profile: UserProfile;
-  situacaoConvite: SituacaoConvite;
-  onInvite: (userId: string) => void;
-};
+    profile: UserProfile,
+    situacaoConvite: SituacaoConvite,
+    onInvite: (userId: string) => void,
+}
 
-type ButtonVariant = "outlined" | "contained" | "text";
+type ButtonVariant = 'outlined' | 'contained' | 'text';
 
 function ProfileCard({ profile, situacaoConvite, onInvite }: ProfileCardProps) {
-  const ProfileCardActions = ({ variant }: { variant: ButtonVariant }) => (
-    <>
-      <Link
-        href={{ pathname: "/user/profiles", query: { id: profile.userId } }}
-        passHref
-      >
-        <Button
-          variant={variant}
-          color="info"
-        >
-          <Typography noWrap>Ver perfil</Typography>
-        </Button>
-      </Link>
-      <Button
-        variant={variant}
-        color={situacaoConvite == "none" ? "primary" : "error"}
-        onClick={() => onInvite(profile.userId!)}
-      >
-        <Typography noWrap>
-          {situacaoConvite == "none" ? "Convidar" : "Cancelar"}
-        </Typography>
-      </Button>
-    </>
-  );
 
-  return (
-    <Card key={profile.userId}>
-      <CardMedia sx={{ position: "relative", height: "24px" }}>
-        <Image
-          src={profile.coverPhotoUrl ?? cover}
-          alt={profile.firstName ?? ""}
-          fill
-          style={{ objectFit: "cover", zIndex: 0 }}
-        />
-      </CardMedia>
-      <CardContent>
-        <Box
-          display="flex"
-          flexDirection="row"
-          gap={2}
-          alignItems="center"
-        >
-          <Box>
-            <Avatar
-              alt={profile.firstName ?? ""}
-              src={profile.photoUrl ?? ""}
-              sx={{ width: "64px", height: "64px", aspectRatio: 1 }}
-            />
-          </Box>
-          <Box flexGrow={1}>
-            <Typography
-              variant="h5"
-              color="primary"
-            >
-              {profile.firstName} {profile.lastName}
-            </Typography>
-            <Typography variant="h6">
-              {UserKindDescriptions[profile.userKind ?? UserKind.Guest]}
-            </Typography>
-          </Box>
-          {situacaoConvite != "none" && (
-            <Chip
-              size="small"
-              label={situacaoConvite == "pending" ? "Pendente" : "Aceito"}
-              color={situacaoConvite == "pending" ? "default" : "success"}
-            />
-          )}
+    const ProfileCardActions = ({ variant }: { variant: ButtonVariant }) => (
+        <>
+            <Link href={{ pathname: '/user/profiles', query: { id: profile.userId } }} passHref>
+                <Button variant={variant} color="info">
+                    <Typography noWrap>Ver perfil</Typography>
+                </Button>
+            </Link>
+            <Button variant={variant} color={situacaoConvite == 'none' ? "primary" : 'error'} onClick={() => onInvite(profile.userId!)}>
+                <Typography noWrap>{situacaoConvite == "none" ? 'Convidar' : 'Cancelar'}</Typography>
+            </Button>
+        </>
+    );
 
-          <Box
-            sx={{
-              display: { xs: "none", sm: "flex" },
-              flexDirection: { sm: "row", md: "row" },
-              gap: 2,
-            }}
-          >
-            <ProfileCardActions variant="outlined" />
-          </Box>
-        </Box>
-      </CardContent>
-      <CardActions
-        sx={{ display: { xs: "flex", sm: "none" }, justifyContent: "flex-end" }}
-      >
-        <ProfileCardActions variant="text" />
-      </CardActions>
-    </Card>
-  );
+    return (
+        <Card key={profile.userId} >
+            <CardMedia sx={{ position: 'relative', height: '24px' }}>
+                <Image src={profile.coverPhotoUrl ?? cover} alt={profile.firstName ?? ''} fill style={{ objectFit: 'cover', zIndex: 0 }} />
+            </CardMedia>
+            <CardContent>
+                <Box display='flex' flexDirection='row' gap={2} alignItems='center'>
+                    <Box>
+                        <Avatar alt={profile.firstName ?? ''} src={profile.photoUrl ?? ''} sx={{ width: '64px', height: '64px', aspectRatio: 1 }} />
+                    </Box>
+                    <Box flexGrow={1}>
+                        <Typography variant="h5" color='primary'>{profile.firstName} {profile.lastName}</Typography>
+                        <Typography variant="h6">{UserKindDescriptions[profile.userKind ?? UserKind.Guest]}</Typography>
+                    </Box>
+                    {situacaoConvite != 'none' &&
+                        <Chip
+                            size="small"
+                            label={situacaoConvite == "pending" ? 'Pendente' : 'Aceito'}
+                            color={situacaoConvite == "pending" ? 'default' : 'success'}
+                        />
+                    }
+
+                    <Box sx={{ display: { xs: 'none', sm: 'flex' }, flexDirection: { sm: 'row', md: 'row' }, gap: 2 }}>
+                        <ProfileCardActions variant="outlined" />
+                    </Box>
+                </Box>
+            </CardContent>
+            <CardActions sx={{ display: { xs: 'flex', sm: 'none' }, justifyContent: 'flex-end' }}>
+                <ProfileCardActions variant="text" />
+            </CardActions>
+        </Card>
+    );
 }
 
 export default function InvitesPage() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const { userCtx } = useAuthContext();
-  const userKind = userCtx.user.profile.userKind!;
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const { userCtx } = useAuthContext();
+    const userKind = userCtx.user.profile.userKind!;
 
-  const [loading, setLoading] = React.useState(true);
-  const [pending, setPending] = React.useState(false);
+    const [loading, setLoading] = React.useState(true);
+    const [pending, setPending] = React.useState(false);
 
-  const [selectedPersonId, setSelectedPersonId] = React.useState("");
+    const [selectedPersonId, setSelectedPersonId] = React.useState('');
 
-  const [pessoas, setPessoas] = React.useState<Pessoa[]>([]);
-  const [profiles, setProfiles] = React.useState<UserProfile[]>([]);
+    const [pessoas, setPessoas] = React.useState<Pessoa[]>([]);
+    const [profiles, setProfiles] = React.useState<UserProfile[]>([]);
 
-  React.useEffect(() => {
-    async function loadPessoas() {
-      const repo = new PessoaRepo(userCtx.user);
-      const pessoas = await repo.getPessoas();
+    React.useEffect(() => {
+        async function loadPessoas() {
+            const repo = new PessoaRepo(userCtx.user);
+            const pessoas = await repo.getPessoas();
 
-      const profileRepo = await getProfileRepository(userCtx.user);
-      const profiles = await profileRepo.getProfiles([
-        UserKind.ProfissionalSaude,
-        UserKind.Educador,
-        UserKind.Cuidador,
-      ]);
+            const profileRepo = await getProfileRepository(userCtx.user);
+            const profiles = await profileRepo.getProfiles([UserKind.ProfissionalSaude, UserKind.Educador, UserKind.Cuidador]);
 
-      setPessoas(pessoas);
-      setProfiles(profiles);
+            setPessoas(pessoas);
+            setProfiles(profiles);
 
-      if (pessoas.length > 0) {
-        setSelectedPersonId(searchParams.get("id") ?? pessoas[0].id);
-      }
+            if (pessoas.length > 0) {
+                setSelectedPersonId(searchParams.get('id') ?? pessoas[0].id);
+            }
 
-      setLoading(false);
+            setLoading(false);
+        }
+
+        loadPessoas();
+    }, [userCtx, searchParams]);
+
+    const isConvidado = (profile?: UserProfile, pessoa?: Pessoa) => {
+        if (!profile || !pessoa) return false;
+        return isConviteAceito(profile, pessoa) || isConvitePending(profile, pessoa);
     }
 
-    loadPessoas();
-  }, [userCtx, searchParams]);
+    const isConvitePending = (profile?: UserProfile, pessoa?: Pessoa) => {
+        if (!profile || !pessoa) return false;
 
-  const isConvidado = (profile?: UserProfile, pessoa?: Pessoa) => {
-    if (!profile || !pessoa) return false;
-    return (
-      isConviteAceito(profile, pessoa) || isConvitePending(profile, pessoa)
-    );
-  };
+        const userId = profile.userId ?? '';
+        const convidadosPending = pessoa.convidadosPending ?? [];
 
-  const isConvitePending = (profile?: UserProfile, pessoa?: Pessoa) => {
-    if (!profile || !pessoa) return false;
-
-    const userId = profile.userId ?? "";
-    const convidadosPending = pessoa.convidadosPending ?? [];
-
-    return convidadosPending.includes(userId);
-  };
-
-  const isConviteAceito = (profile?: UserProfile, pessoa?: Pessoa) => {
-    if (!profile || !pessoa) return false;
-
-    const userId = profile.userId ?? "";
-    const convidados = pessoa.convidados ?? [];
-
-    return convidados.includes(userId);
-  };
-
-  const getSituacaoConvite = (profile: UserProfile) => {
-    if (isConviteAceito(profile, selectedPerson)) return "accepted";
-    if (isConvitePending(profile, selectedPerson)) return "pending";
-    return "none";
-  };
-
-  const handleConvidar = async (userId: string) => {
-    if (!selectedPerson) return;
-
-    setPending(true);
-    try {
-      const repo = new PessoaRepo(userCtx.user);
-      await repo.convidar(selectedPerson, userId);
-
-      const pessoas = await repo.getPessoas();
-      setPessoas(pessoas);
-    } finally {
-      setPending(false);
+        return convidadosPending.includes(userId);
     }
-  };
 
-  const handleCancelInvite = async (userId: string) => {
-    if (!selectedPerson) return;
+    const isConviteAceito = (profile?: UserProfile, pessoa?: Pessoa) => {
+        if (!profile || !pessoa) return false;
 
-    setPending(true);
-    try {
-      const repo = new PessoaRepo(userCtx.user);
-      await repo.cancelInvite(selectedPerson, userId);
+        const userId = profile.userId ?? '';
+        const convidados = pessoa.convidados ?? [];
 
-      const pessoas = await repo.getPessoas();
-
-      setPessoas(pessoas);
-    } finally {
-      setPending(false);
+        return convidados.includes(userId);
     }
-  };
 
-  const handlePersonChange = (pessoa: Pessoa) => {
-    setLoading(true);
-    setSelectedPersonId(pessoa.id);
-    router.replace("/user/invites?id=" + pessoa.id);
-  };
+    const getSituacaoConvite = (profile: UserProfile) => {
+        if (isConviteAceito(profile, selectedPerson)) return 'accepted';
+        if (isConvitePending(profile, selectedPerson)) return 'pending';
+        return 'none';
+    }
 
-  if (loading) return <LoadingModal />;
+    const handleConvidar = async (userId: string) => {
+        if (!selectedPerson) return;
 
-  if (pessoas.length === 0)
-    return (
-      <>
-        <Typography
-          variant="h3"
-          color="primary"
-        >
-          Enviar Convite
-        </Typography>
-        {/*Eduardo fez o input convite botão de neivar com inpu de convite
-         */}
+        setPending(true);
+        try {
+            const repo = new PessoaRepo(userCtx.user);
+            await repo.convidar(selectedPerson, userId);
 
-        {/*fim Eduardo mexeu*/}
-        <Divider sx={{ mt: 1, mb: 3 }} />
-        <PessoasEmptyState />
-      </>
+            const pessoas = await repo.getPessoas();
+            setPessoas(pessoas);
+        } finally {
+            setPending(false);
+        }
+    }
+
+    const handleCancelInvite = async (userId: string) => {
+        if (!selectedPerson) return;
+
+        setPending(true);
+        try {
+            const repo = new PessoaRepo(userCtx.user);
+            await repo.cancelInvite(selectedPerson, userId);
+
+            const pessoas = await repo.getPessoas();
+
+            setPessoas(pessoas);
+        } finally {
+            setPending(false);
+        }
+    }
+
+    const handlePersonChange = (pessoa: Pessoa) => {
+        setLoading(true);
+        setSelectedPersonId(pessoa.id);
+        router.replace('/user/invites?id=' + pessoa.id);
+    }
+
+
+    if (loading) return <LoadingModal />;
+
+    if (pessoas.length === 0) return (
+        <>
+            <Typography variant="h3" color='primary'>Enviar Convite</Typography>
+            {/*Eduardo fez o input convite botão de neivar com inpu de convite
+             */ }
+
+
+            {/*fim Eduardo mexeu*/}
+            <Divider sx={{ mt: 1, mb: 3 }} />
+            <PessoasEmptyState />
+        </>
     );
 
-  const selectedPerson = pessoas.find((p) => p.id === selectedPersonId);
-  const convidados = profiles.filter((profile) =>
-    isConvidado(profile, selectedPerson)
-  );
-  const naoConvidados = profiles.filter(
-    (profile) => !isConvidado(profile, selectedPerson)
-  );
+    const selectedPerson = pessoas.find(p => p.id === selectedPersonId);
+    const convidados = profiles.filter((profile) => isConvidado(profile, selectedPerson));
+    const naoConvidados = profiles.filter((profile) => !isConvidado(profile, selectedPerson));
 
-  //se convite aceito retorn minha pagian de convite aceito
-  /*if (convidado
+    //se convite aceito retorn minha pagian de convite aceito
+    /*if (convidado
     ) {
       return   ConviteAceito
     
     }*/
 
-  /*referências
+
+
+    /*referências
     
     https://mui.com/material-ui/react-alert/
     */
 
-  return (
-    <>
-      <LoadingModal visible={pending} />
-      <Typography
-        variant="h3"
-        color="primary"
-      >
-        Enviar Convite
-      </Typography>
-      <Divider sx={{ mt: 1, mb: 3 }} />
-
-      <PersonPicker
-        label="Visualizando convites para"
-        pessoas={pessoas}
-        selectedPerson={selectedPerson ?? pessoas[0]}
-        userKind={userKind}
-        onChange={handlePersonChange}
-      />
-
-      {profiles.length === 0 ? (
+    return (
         <>
-          <EmptyState />
-        </>
-      ) : (
-        <Box
-          display="flex"
-          flexDirection="column"
-          justifyContent="stretch"
-          gap={2}
-        >
-          {convidados.length > 0 && (
-            <>
-              <Typography
-                variant="h5"
-                color="primary"
-                sx={{ mt: 3 }}
-              >
-                Convites enviados
-              </Typography>
-              {convidados.map((profile) => (
-                <ProfileCard
-                  key={profile.userId}
-                  profile={profile}
-                  situacaoConvite={getSituacaoConvite(profile)}
-                  onInvite={handleCancelInvite}
-                />
-              ))}
-            </>
-          )}
+            <LoadingModal visible={pending} />
+            <Typography variant="h3" color='primary'>Enviar Convite</Typography>
+            <Divider sx={{ mt: 1, mb: 3 }} />
 
-          {naoConvidados.length > 0 && (
-            <>
-              <Typography
-                variant="h5"
-                color="primary"
-                sx={{ mt: 3 }}
-              >
-                Enviar convite para
-              </Typography>
-              {/*<.import { Input } from '@mui/base/Input';
+            <PersonPicker label="Visualizando convites para" pessoas={pessoas} selectedPerson={selectedPerson ?? pessoas[0]} userKind={userKind} onChange={handlePersonChange} />
+
+            {profiles.length === 0
+                ? (
+                    <>
+                        <EmptyState />
+                    </>
+                )
+                : (
+                    <Box display="flex" flexDirection='column' justifyContent='stretch' gap={2}>
+                        {convidados.length > 0 && (
+                            <>
+                                <Typography variant="h5" color='primary' sx={{ mt: 3 }}>Convites enviados</Typography>
+                                {convidados.map(profile => (<ProfileCard key={profile.userId} profile={profile} situacaoConvite={getSituacaoConvite(profile)} onInvite={handleCancelInvite} />))}
+                            </>
+                        )}
+
+
+                        {naoConvidados.length > 0 && (
+                            <>
+                                <Typography variant="h5" color='primary' sx={{ mt: 3 }}>Enviar convite para</Typography>
+                                {/*<.import { Input } from '@mui/base/Input';
                                 compenente de campo de inserir 
                                */}
-              {/* código do campo de enviaro com o botão de enviar falta a progrmalaõpa ainda*/}
-              <form className="flex flex-col gap-4 mt-4">
-                <label>E-mail</label>
-                <TextField
-                  label="E-mail"
-                  variant="filled"
-                  fullWidth
-                  type={"manda_email"}
-                  // value={}
-                  // onChange={}
-                />
-                <label>Nome do(a) convidado(a)</label>{" "}
-                <TextField
-                  label="Nome do(a) convidado(a)"
-                  variant="filled"
-                  fullWidth
-                  type={"manda_nome"}
-                  // value={}
-                  // onChange={}
-                />
-                <Button
-                  type="submit"
-                  variant="outlined"
-                  color="primary"
-                  onClick={gravardados}
-                >
-                  Enviar <SendOutlined></SendOutlined>
-                </Button>
-              </form>
+                                {/* código do campo de enviaro com o botão de enviar falta a progrmalaõpa ainda*/}
+                                  <form action={gravardados} method="post">
+                                <center>
+                                    
+                                  {/*  Label comn L maiusculo  figurinha de  ponta de seta apontoando pra direita já  label com l minusculo ´´e caixa de texto somente leitura do html
+                                   */}
+                            <label>E-mail</label> <Input name="email" placeholder="E-mail"></Input>
 
-              {naoConvidados.map((profile) => (
-                <ProfileCard
-                  key={profile.userId}
-                  profile={profile}
-                  situacaoConvite={getSituacaoConvite(profile)}
-                  onInvite={handleConvidar}
-                />
-              ))}
-            </>
-          )}
-        </Box>
-      )}
-    </>
-  );
+                            <label>Nome do(a) convidado(a)</label>     <Input  name="nome" placeholder="Nome do(a) convidado(a)"></Input>
+                                   {/*  em src\app\common\conviteaceito.tsx onclick enviar
+                                   de enviar
+                                   onClick={}*/}
+                                
+                                {//onClick={gravardados("email",'nome')}
+                                
+                                }
+                              <button type="submit" >                                    
+                                        Salvar<SendOutlined></SendOutlined></button>
+                            
+                            </center>
+                              </form>
+
+                              
+                              
+        {/*a imagem de aviazinho de papel pra enviar ter centralizado automoatimanet epla biblitoeca Mui */}                 
+                              
+                                
+
+                                {/*fim do código do botão de enviar
+                                referências Aplicacoes Web Real Time com Node-js - Casa do Codigo
+                                
+                                */}
+
+                                {naoConvidados.map(profile => (<ProfileCard key={profile.userId} profile={profile} situacaoConvite={getSituacaoConvite(profile)} onInvite={handleConvidar} />))}
+                            </>
+                        )}
+                    </Box>
+                )
+            }
+        </>
+    );
 }
